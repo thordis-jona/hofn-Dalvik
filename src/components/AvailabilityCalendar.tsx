@@ -33,7 +33,14 @@ function CalendarContent() {
         : undefined;
   const blocked = new Set(availabilityData?.blocked ?? []);
   const status = availability.state === 'failure' ? 'error' : availability.state === 'pending' ? 'loading' : 'ready';
-  const updatedAt = availabilityData?.updatedAt ?? null;
+  const statusLabel =
+    status === 'loading'
+      ? 'Sæki dagatal…'
+      : status === 'error'
+        ? 'Gat ekki sótt dagatal'
+        : availability.fetch === 'fetching'
+          ? 'Samstillir dagatal…'
+          : null;
 
   const [selectedDate, setSelectedDate] = useState<CalendarDate | null>(null);
 
@@ -53,15 +60,14 @@ function CalendarContent() {
         <div>
           <span className="room-tag">Lausar dagsetningar</span>
           <h3>Finndu dagana sem henta</h3>
-          <p>Veldu komudag í dagatalinu. Gráir dagar eru þegar uppteknir eða lokaðir.</p>
+          <p>Veldu komudag í dagatalinu. Dökkbeige dagar eru þegar uppteknir eða lokaðir.</p>
         </div>
-        <div className={`availability-status availability-status--${status}`} role="status">
-          <span className="availability-status__dot" aria-hidden="true"></span>
-          {status === 'loading' && 'Sæki dagatal…'}
-          {status === 'ready' && availability.fetch === 'fetching' ? 'Samstillir dagatal…' : null}
-          {status === 'ready' && availability.fetch !== 'fetching' && 'Dagatal uppfært'}
-          {status === 'error' && 'Gat ekki sótt dagatal'}
-        </div>
+        {statusLabel && (
+          <div className={`availability-status availability-status--${status}`} role="status">
+            <span className="availability-status__dot" aria-hidden="true"></span>
+            {statusLabel}
+          </div>
+        )}
       </div>
 
       <I18nProvider locale="is-IS">
@@ -79,21 +85,23 @@ function CalendarContent() {
             <CalendarHeading />
             <Button slot="next" aria-label="Næsti mánuður">→</Button>
           </div>
-          <CalendarGrid weekdayStyle="short">
-            <CalendarGridHeader>
-              {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
-            </CalendarGridHeader>
-            <CalendarGridBody>
-              {(date) => (
-                <CalendarCell
-                  date={date}
-                  onClick={() => window.open(airbnbListingUrlForArrival(date), '_blank', 'noopener,noreferrer')}
-                >
-                  {({ formattedDate }) => <span>{formattedDate}</span>}
-                </CalendarCell>
-              )}
-            </CalendarGridBody>
-          </CalendarGrid>
+          <div className="availability-calendar__grid-frame">
+            <CalendarGrid weekdayStyle="short">
+              <CalendarGridHeader>
+                {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
+              </CalendarGridHeader>
+              <CalendarGridBody>
+                {(date) => (
+                  <CalendarCell
+                    date={date}
+                    onClick={() => window.open(airbnbListingUrlForArrival(date), '_blank', 'noopener,noreferrer')}
+                  >
+                    {({ formattedDate }) => <span>{formattedDate}</span>}
+                  </CalendarCell>
+                )}
+              </CalendarGridBody>
+            </CalendarGrid>
+          </div>
         </Calendar>
       </I18nProvider>
 
@@ -101,9 +109,9 @@ function CalendarContent() {
         <div className="availability-legend" aria-label="Skýringar">
           <span><i className="availability-legend__swatch availability-legend__swatch--open"></i> Laus</span>
           <span><i className="availability-legend__swatch availability-legend__swatch--blocked"></i> Ekki laus</span>
+          <span><i className="availability-legend__swatch availability-legend__swatch--selected"></i> Valinn dagur</span>
         </div>
         {selectedDate && <p>Komudagur valinn: <strong>{selectedDate.toString()}</strong></p>}
-        {updatedAt && <small>Síðast samstillt {updatedAt.toLocaleString('is-IS')}</small>}
       </div>
     </div>
   );

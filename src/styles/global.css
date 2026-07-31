@@ -203,16 +203,16 @@ section { padding: 90px 0; }
 .availability-calendar__toolbar .react-aria-Button:hover { color: var(--white); background: var(--sage-dark); }
 .availability-calendar__toolbar .react-aria-Button:focus-visible { outline: 3px solid rgb(169 117 74 / 45%); outline-offset: 2px; }
 .availability-calendar__toolbar .react-aria-Button[slot="next"] { justify-self: end; }
-.react-aria-CalendarHeading { color: var(--sage-dark); font-family: 'Fraunces', serif; font-size: 22px; text-align: center; }
+.react-aria-CalendarHeading { color: var(--sage-dark); font-family: 'Fraunces', serif; font-size: 22px; text-align: center; text-transform: capitalize; }
+.availability-calendar__grid-frame { height: 318px; }
 .react-aria-CalendarGrid { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 4px; }
 .react-aria-CalendarHeaderCell { padding-bottom: 8px; color: #8b8574; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
-.react-aria-CalendarCell { position: relative; width: auto; height: 42px; padding: 0; border: 0; border-radius: 50%; color: var(--charcoal); background: transparent; font-size: 14px; text-align: center; cursor: pointer; }
+.react-aria-CalendarCell { position: relative; width: 42px; height: 42px; margin-inline: auto; padding: 0; border: 0; border-radius: 50%; color: var(--charcoal); background: var(--white); box-shadow: inset 0 0 0 1px rgb(221 211 191 / 70%); font-size: 14px; text-align: center; cursor: pointer; }
 .react-aria-CalendarCell > span { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; }
-.react-aria-CalendarCell:hover > span { background: rgb(95 111 82 / 14%); }
-.react-aria-CalendarCell[data-today] > span { border: 1px solid var(--sage); }
-.react-aria-CalendarCell[data-selected] > span { color: var(--white); background: var(--sage-dark); }
-.react-aria-CalendarCell[data-unavailable] > span { color: #8b8574; background: rgb(221 211 191 / 62%); cursor: not-allowed; text-decoration: line-through; }
-.react-aria-CalendarCell[data-outside-month] { color: #b7ad9b; }
+.react-aria-CalendarCell:hover { box-shadow: inset 0 0 0 2px var(--sage); }
+.react-aria-CalendarCell[data-selected] { color: var(--white); background: var(--sage-dark); box-shadow: none; }
+.react-aria-CalendarCell[data-unavailable] { color: #4b483f; background: #d2c5ae; box-shadow: none; cursor: not-allowed; text-decoration: line-through; }
+.react-aria-CalendarCell[data-outside-month] { color: #a79d8b; background: transparent; box-shadow: none; }
 .react-aria-CalendarCell[data-focus-visible] { outline: 3px solid rgb(169 117 74 / 45%); outline-offset: 2px; }
 .availability-widget__footer { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-top: 20px; color: #6b6656; font-size: 13px; }
 .availability-widget__footer p { margin: 0; }
@@ -220,8 +220,9 @@ section { padding: 90px 0; }
 .availability-legend { display: flex; gap: 14px; }
 .availability-legend span { display: inline-flex; gap: 6px; align-items: center; }
 .availability-legend__swatch { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
-.availability-legend__swatch--open { border: 1px solid var(--sage); background: var(--white); }
-.availability-legend__swatch--blocked { background: var(--line); }
+.availability-legend__swatch--open { border: 1px solid var(--line); background: var(--white); }
+.availability-legend__swatch--blocked { background: #d2c5ae; }
+.availability-legend__swatch--selected { background: var(--sage-dark); }
 
 /* Guidebook */
 .guidebook { background: var(--cream-2); }
@@ -350,8 +351,9 @@ footer a { text-decoration: none; }
   .availability-status { margin-top: 16px; }
   .gallery-grid { columns: 1; }
   .guide-teaser-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .availability-calendar__grid-frame { height: 286px; }
   .react-aria-CalendarGrid { border-spacing: 2px; }
-  .react-aria-CalendarCell { height: 38px; }
+  .react-aria-CalendarCell { width: 38px; height: 38px; }
   .lightbox { padding: 20px; }
   .lb-prev { left: 10px; }
   .lb-next { right: 10px; }
