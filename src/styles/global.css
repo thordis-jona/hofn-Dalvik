@@ -57,10 +57,11 @@ section { padding: 90px 0; }
   backdrop-filter: blur(8px);
 }
 .nav-inner { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 20px; width: min(1180px, calc(100% - 56px)); margin: 0 auto; padding: 16px 0; }
-.brand { color: var(--sage-dark); font-size: 22px; letter-spacing: .02em; text-decoration: none; }
+.brand { flex: 0 0 auto; color: var(--sage-dark); font-size: 22px; letter-spacing: .02em; text-decoration: none; white-space: nowrap; }
 .brand span { color: var(--wood); }
 .links { display: flex; min-width: 0; align-items: center; justify-content: flex-end; gap: 22px; }
 .links a { color: var(--charcoal); font-size: 14.5px; opacity: .85; text-decoration: none; transition: opacity .2s; }
+.links > a { white-space: nowrap; }
 .links a:hover { opacity: 1; }
 .language-switch { display: inline-flex; flex: 0 0 auto; overflow: hidden; border: 1px solid var(--line); border-radius: 999px; background: var(--white); }
 .links .language-switch a { padding: 5px 9px; font-size: 12px; font-weight: 700; opacity: .7; }

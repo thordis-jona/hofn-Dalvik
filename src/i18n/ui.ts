@@ -80,11 +80,8 @@ export const ui = {
       navigation: [
         { href: '#um-husid', label: 'Um húsið' },
         { href: '#myndir', label: 'Myndir' },
-        { href: '#herbergi', label: 'Herbergjaskipan' },
-        { href: '#utivist', label: 'Útivist' },
         { href: '#laust', label: 'Lausar dagsetningar' },
         { href: '#ferdahandbok', label: 'Ferðahandbók' },
-        { href: '#stadsetning', label: 'Staðsetning' },
       ],
       stats: ['135 fm · 3 hæðir', '4 svefnherbergi', '2 baðherbergi', 'Gistir 8 · Gistileyfi II'],
       inquiryCta: 'Senda fyrirspurn',
@@ -208,11 +205,8 @@ export const ui = {
       navigation: [
         { href: '#about', label: 'The house' },
         { href: '#gallery', label: 'Photos' },
-        { href: '#rooms', label: 'Rooms' },
-        { href: '#outdoors', label: 'Outdoors' },
         { href: '#availability', label: 'Availability' },
         { href: '#travel-guide', label: 'Travel guide' },
-        { href: '#location', label: 'Location' },
       ],
       stats: ['135 m² · 3 floors', '4 bedrooms', '2 bathrooms', 'Sleeps 8 · Licensed'],
       inquiryCta: 'Send an enquiry',

@@ -32,16 +32,27 @@ const messages = ui[locale];
 const data = siteData[locale];
 const gallery = data.gallery;
 const guideUrl = localeUrl(locale, 'guide');
-const sectionIds = {
-  about: messages.home.navigation[0].href.slice(1),
-  gallery: messages.home.navigation[1].href.slice(1),
-  rooms: messages.home.navigation[2].href.slice(1),
-  outdoors: messages.home.navigation[3].href.slice(1),
-  availability: messages.home.navigation[4].href.slice(1),
-  guide: messages.home.navigation[5].href.slice(1),
-  location: messages.home.navigation[6].href.slice(1),
-  inquiry: locale === 'is' ? 'fyrirspurn' : 'enquiry',
-};
+const sectionIds = locale === 'is'
+  ? {
+      about: 'um-husid',
+      gallery: 'myndir',
+      rooms: 'herbergi',
+      outdoors: 'utivist',
+      availability: 'laust',
+      guide: 'ferdahandbok',
+      location: 'stadsetning',
+      inquiry: 'fyrirspurn',
+    }
+  : {
+      about: 'about',
+      gallery: 'gallery',
+      rooms: 'rooms',
+      outdoors: 'outdoors',
+      availability: 'availability',
+      guide: 'travel-guide',
+      location: 'location',
+      inquiry: 'enquiry',
+    };
 ---
 
 <SiteLayout
