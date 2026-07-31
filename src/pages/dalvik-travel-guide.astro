@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import SiteIcon from '../components/SiteIcon.astro';
+import { AIRBNB_LISTING_URL } from '../lib/site-links';
 import '../styles/global.css';
 
 export const prerender = true;
@@ -34,7 +35,10 @@ const guideItems = await Promise.all(
         <a class="brand" href="/" aria-label="Höfn, Dalvík">Höfn <span>· Dalvík</span></a>
         <nav class="links" aria-label="Aðalvalmynd">
           <a href="/">Til baka í Höfn</a>
-          <a href="/#fyrirspurn" class="btn">Senda fyrirspurn</a>
+          <a href={AIRBNB_LISTING_URL} class="btn btn-airbnb" target="_blank" rel="noopener">
+            <SiteIcon name="house" />
+            Bóka á Airbnb
+          </a>
         </nav>
       </div>
     </header>
@@ -45,7 +49,10 @@ const guideItems = await Promise.all(
           <div class="kicker">Ferðahandbók · frjáls aðgangur</div>
           <h1>Dalvík, Tröllaskagi og Eyjafjörður</h1>
           <p>Uppáhaldsstaðir okkar fyrir góðan mat, heita potta, hvalaskoðun, göngur og dagsferðir — allt frá Höfn sem bækistöð.</p>
-          <a class="btn" href="/">Skoða Höfn húsið</a>
+          <a class="btn btn-airbnb" href={AIRBNB_LISTING_URL} target="_blank" rel="noopener">
+            <SiteIcon name="house" />
+            Bóka á Airbnb
+          </a>
         </div>
       </section>
 

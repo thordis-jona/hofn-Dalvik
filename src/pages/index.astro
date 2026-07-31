@@ -4,6 +4,7 @@ import AvailabilityCalendar from '../components/AvailabilityCalendar';
 import BaseHead from '../components/BaseHead.astro';
 import SiteIcon from '../components/SiteIcon.astro';
 import { adventures, features, gallery, locationPoints, rooms } from '../data/site';
+import { AIRBNB_LISTING_URL } from '../lib/site-links';
 import '../styles/global.css';
 
 export const prerender = true;
@@ -63,7 +64,10 @@ const stats = [
           <a href="#laust">Lausar dagsetningar</a>
           <a href="#ferdahandbok">Ferðahandbók</a>
           <a href="#stadsetning">Staðsetning</a>
-          <a href="#fyrirspurn" class="btn">Senda fyrirspurn</a>
+          <a href={AIRBNB_LISTING_URL} class="btn btn-airbnb" target="_blank" rel="noopener">
+            <SiteIcon name="house" />
+            Bóka á Airbnb
+          </a>
         </nav>
       </div>
     </header>
@@ -78,8 +82,11 @@ const stats = [
             {stats.map((stat) => <div class="stat-pill">{stat}</div>)}
           </div>
           <div class="hero-ctas">
-            <a href="#fyrirspurn" class="btn">Senda fyrirspurn um bókun</a>
-            <a href="#myndir" class="btn outline">Skoða myndir</a>
+            <a href={AIRBNB_LISTING_URL} class="btn btn-airbnb" target="_blank" rel="noopener">
+              <SiteIcon name="house" />
+              Bóka á Airbnb
+            </a>
+            <a href="#fyrirspurn" class="btn outline">Senda fyrirspurn</a>
           </div>
         </div>
       </section>
@@ -246,6 +253,10 @@ const stats = [
             <div class="kicker booking-kicker">{booking.data.kicker}</div>
             <h2>{booking.data.title}</h2>
             <div class="prose booking-copy"><BookingContent /></div>
+            <a href={AIRBNB_LISTING_URL} class="btn btn-airbnb" target="_blank" rel="noopener">
+              <SiteIcon name="house" />
+              Bóka á Airbnb
+            </a>
             <div class="contact-line">Eða hafðu beint samband á <a href="mailto:thordis@manifesto.is">thordis@manifesto.is</a></div>
           </div>
           <form class="request-form" id="requestForm">

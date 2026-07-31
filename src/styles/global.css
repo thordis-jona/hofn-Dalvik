@@ -8,6 +8,8 @@
   --teal-dark: #3d5760;
   --wood: #a9754a;
   --rust: #8a4a3a;
+  --airbnb: #ff385c;
+  --airbnb-dark: #e31c5f;
   --white: #fff;
   --line: #ddd3bf;
   --shadow: 0 20px 50px rgb(43 42 38 / 12%);
@@ -76,6 +78,9 @@ section { padding: 90px 0; }
   transition: background .2s, transform .2s;
 }
 .btn:hover { background: var(--rust); transform: translateY(-1px); }
+.btn-airbnb { display: inline-flex; gap: 9px; align-items: center; background: var(--airbnb); }
+.btn-airbnb:hover { background: var(--airbnb-dark); }
+.btn-airbnb svg { width: 17px; height: 17px; }
 .btn.outline { border: 1.5px solid var(--white); color: var(--white); background: transparent; }
 .btn.outline:hover { color: var(--charcoal); background: var(--white); }
 
