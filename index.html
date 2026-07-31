@@ -39,6 +39,7 @@
   img{max-width:100%;display:block;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
   section{padding:90px 0;}
+  /* NAV */
   header.nav{
     position:sticky;top:0;z-index:50;
     background:rgba(247,242,233,.92);
@@ -64,6 +65,7 @@
   .btn:hover{background:var(--rust);transform:translateY(-1px);}
   .btn.outline{background:transparent;border:1.5px solid var(--white);color:var(--white);}
   .btn.outline:hover{background:var(--white);color:var(--charcoal);}
+  /* HERO */
   .hero{
     position:relative;height:92vh;min-height:560px;
     display:flex;align-items:flex-end;
@@ -85,6 +87,7 @@
     background:rgba(255,255,255,.08);
   }
   .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
+  /* INTRO */
   .intro{background:var(--white);}
   .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;}
   .kicker{
@@ -102,6 +105,7 @@
   .fact .n{font-family:'Fraunces',serif;font-size:30px;color:var(--sage-dark);}
   .fact .l{font-size:13.5px;color:#6b6656;letter-spacing:.02em;}
   .intro-photo{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);}
+  /* GALLERY */
   .gallery-section{background:var(--cream-2);}
   .section-head{max-width:640px;margin-bottom:44px;}
   .section-head h2{font-size:clamp(28px,3.4vw,38px);color:var(--sage-dark);margin-bottom:12px;}
@@ -122,6 +126,7 @@
     opacity:0;transition:opacity .25s;
   }
   .gallery-grid figure:hover figcaption{opacity:1;}
+  /* ROOMS */
   .rooms{background:var(--white);}
   .room-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
   .room-card{
@@ -137,6 +142,7 @@
     display:inline-block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--wood);font-weight:700;margin-bottom:8px;
   }
+  /* FEATURES */
   .features{background:var(--sage-dark);color:var(--cream);}
   .features .section-head h2{color:var(--white);}
   .features .section-head p{color:rgba(247,242,233,.8);}
@@ -148,6 +154,7 @@
   .feature-card .icon{font-size:26px;margin-bottom:14px;}
   .feature-card h3{font-size:17px;margin-bottom:8px;font-family:'Karla',sans-serif;font-weight:700;}
   .feature-card p{font-size:14.5px;color:rgba(247,242,233,.85);margin:0;}
+  /* ADVENTURE */
   .adventure{background:var(--white);}
   .adventure-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   .adventure-card{
@@ -164,6 +171,7 @@
   .adventure-note{
     margin-top:22px;font-size:13.5px;color:#8b8574;text-align:center;
   }
+  /* LOCATION */
   .location{background:var(--cream);}
   .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
   .loc-grid h2{color:var(--sage-dark);font-size:clamp(26px,3vw,36px);margin-bottom:18px;}
@@ -176,6 +184,18 @@
   .loc-list li b{color:var(--sage-dark);}
   .map-frame{border-radius:16px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);}
   .map-frame iframe{width:100%;height:420px;border:0;display:block;}
+  /* GUIDEBOOK */
+  .guidebook{background:var(--cream-2);}
+  .guide-intro{max-width:760px;}
+  .guide-note{font-size:14px;color:#8b8574;margin-top:-4px;}
+  .guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .guide-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:22px 22px 24px;}
+  .guide-card .guide-num{font-family:'Fraunces',serif;font-size:13px;color:var(--wood);font-weight:700;letter-spacing:.02em;margin-bottom:6px;}
+  .guide-card h3{font-size:17px;color:var(--sage-dark);margin-bottom:6px;line-height:1.3;}
+  .guide-cat{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-dark);font-weight:700;margin-bottom:10px;}
+  .guide-card p{font-size:14px;color:#4b483f;margin:0;}
+  .guide-card a{color:var(--teal-dark);text-decoration:underline;}
+  /* BOOKING FORM */
   .booking{background:var(--teal-dark);color:var(--white);position:relative;overflow:hidden;}
   .booking::before{
     content:"";position:absolute;inset:0;opacity:.12;
@@ -200,10 +220,12 @@
   textarea{resize:vertical;min-height:90px;}
   form.request-form .btn{width:100%;padding:14px;font-size:15px;margin-top:6px;}
   .form-note{font-size:12.5px;color:#8b8574;margin-top:12px;text-align:center;}
+  /* FOOTER */
   footer{background:var(--charcoal);color:rgba(247,242,233,.7);padding:40px 0;font-size:13.5px;}
   .footer-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
   footer .brand{color:var(--cream);font-size:18px;}
   footer .brand span{color:var(--wood);}
+  /* LIGHTBOX */
   .lightbox{
     position:fixed;inset:0;background:rgba(20,18,15,.94);z-index:200;
     display:none;align-items:center;justify-content:center;
@@ -224,16 +246,17 @@
   .lightbox .lb-close{top:24px;right:24px;}
   .lightbox .lb-prev{left:24px;top:50%;transform:translateY(-50%);}
   .lightbox .lb-next{right:24px;top:50%;transform:translateY(-50%);}
+  /* RESPONSIVE */
   @media (max-width:900px){
     nav.links{display:none;}
     .intro-grid, .loc-grid, .booking-inner{grid-template-columns:1fr;}
-    .room-grid, .feature-grid, .adventure-grid{grid-template-columns:1fr 1fr;}
+    .room-grid, .feature-grid, .adventure-grid, .guide-grid{grid-template-columns:1fr 1fr;}
     .gallery-grid{columns:2 200px;}
     .form-row{grid-template-columns:1fr;}
     section{padding:60px 0;}
   }
   @media (max-width:560px){
-    .room-grid, .feature-grid, .adventure-grid{grid-template-columns:1fr;}
+    .room-grid, .feature-grid, .adventure-grid, .guide-grid{grid-template-columns:1fr;}
     .facts{grid-template-columns:1fr 1fr;}
   }
 </style>
@@ -247,6 +270,7 @@
       <a href="#myndir">Myndir</a>
       <a href="#herbergi">Herbergjaskipan</a>
       <a href="#utivist">Útivist</a>
+      <a href="#ferdahandbok">Ferðahandbók</a>
       <a href="#stadsetning">Staðsetning</a>
       <a href="#fyrirspurn" class="btn">Senda fyrirspurn</a>
     </nav>
@@ -422,6 +446,132 @@
       </div>
     </div>
     <p class="adventure-note">Myndir af skíðum, gönguferðum og hvalaskoðun bætast við hér fljótlega.</p>
+  </div>
+</section>
+<section class="guidebook" id="ferdahandbok">
+  <div class="wrap">
+    <div class="section-head guide-intro">
+      <div class="kicker">Ferðahandbók</div>
+      <h2>Höfn – Dalvík og Tröllaskagi</h2>
+      <p>Velkomin á Dalvík! Hér höfum við tekið saman nokkra af okkar uppáhaldsstöðum í bænum og nágrenninu — góðan mat, sund, hvalaskoðun, útivist og dagsferðir. Dalvík er frábær bækistöð fyrir Tröllaskaga og Eyjafjörð, hvort sem komið er að sumri eða vetri.</p>
+      <p class="guide-note">Opnunartímar, verð og framboð geta breyst eftir árstíðum; gestir ættu alltaf að skoða vefsíðu viðkomandi staðar áður en þeir leggja af stað.</p>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-num">01</div>
+        <h3>Gísli, Eiríkur, Helgi – Kaffihús Bakkabræðra</h3>
+        <span class="guide-cat">Kaffi og matur · Dalvík</span>
+        <p>Notalegt kaffihús í hjarta Dalvíkur og góður staður fyrir kaffi, kökur eða léttan hádegisverð. Fiskisúpan er sérstaklega vinsæl. Frábær viðkomustaður eftir göngu um bæinn eða dag við höfnina.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">02</div>
+        <h3>Böggvisbrauð</h3>
+        <span class="guide-cat">Handverksbakarí og kaffihús · Dalvík/Svarfaðardalur</span>
+        <p>Handverksbakarí með sterka tengingu við Svarfaðardal. Böggvisbrauð leggur áherslu á súrdeigsbrauð, gæðahráefni, staðbundið hráefni og gamlar baksturshefðir. Kornið er malað á staðnum og brauðin bökuð í viðarhituðum steinofni. Fylgist með Facebook-síðu Böggvisbrauðs fyrir opnunartíma, sölustaði og upplýsingar um nýbakað brauð.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">03</div>
+        <h3>Baccalá Bar</h3>
+        <span class="guide-cat">Sjávarréttir · Hauganes · um 12 km frá Dalvík</span>
+        <p>Einstakur veitingastaður við höfnina á Hauganesi. Staðurinn er þekktur fyrir saltfisk, meðal annars djúpsteiktan saltfisk og saltfiskpizzu. Skemmtilegt er að sameina heimsóknina við hvalaskoðun eða heitu pottana á ströndinni.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">04</div>
+        <h3>Sundlaug Dalvíkur</h3>
+        <span class="guide-cat">Sund og slökun · Dalvík</span>
+        <p>Góð íslensk sundlaugarupplifun með 25 metra laug, heitum pottum, barnalaug, vatnsrennibraut og eimbaði. Útsýnið til fjallanna gerir sundferðina sérstaklega notalega. Hentar vel bæði eftir útivist og á rólegum fjölskyldudegi.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">05</div>
+        <h3>Arctic Sea Tours</h3>
+        <span class="guide-cat">Hvalaskoðun og sjóstangveiði · Dalvíkurhöfn</span>
+        <p>Hvalaskoðun frá Dalvíkurhöfn á hefðbundnum eikarbátum. Ferðirnar fara um Eyjafjörð og oft er boðið upp á stutta sjóstangveiði og smökkun á grilluðum afla eftir ferð. Klæðið ykkur vel og bókið fyrirfram, sérstaklega á sumrin.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">06</div>
+        <h3>Hvalaskoðun á Hauganesi</h3>
+        <span class="guide-cat">Hvalaskoðun · Hauganes</span>
+        <p>Hauganes er lítið sjávarþorp skammt sunnan Dalvíkur og þar starfar elsta hvalaskoðunarfyrirtæki landsins. Góð leið til að upplifa Eyjafjörð og fallegt þorpsumhverfi í sömu ferð.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">07</div>
+        <h3>Heitu pottarnir á Hauganesi</h3>
+        <span class="guide-cat">Jarðhiti og slökun · Hauganes</span>
+        <p>Heitir pottar við svarta strönd með útsýni yfir Eyjafjörð og fjöllin. Einföld og eftirminnileg upplifun í litlu sjávarþorpi. Gott er að hafa með sér sundföt og handklæði og kanna opnun og greiðslufyrirkomulag áður en farið er.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">08</div>
+        <h3>Bjórböðin</h3>
+        <span class="guide-cat">Heilsulind og veitingar · Árskógssandur</span>
+        <p>Óvenjuleg spa-upplifun þar sem gestir slaka á í baði með vatni, humlum, geri og ungum bjór og fara síðan í hvíld. Enginn áfengur bjór er í sjálfu baðinu, en bjórdæla er við kerin fyrir gesti sem hafa aldur til. Bókið fyrirfram.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">09</div>
+        <h3>Menningarhúsið Berg</h3>
+        <span class="guide-cat">Menning, bókasafn og kaffihús · Dalvík</span>
+        <p>Menningarhús í miðbæ Dalvíkur með bókasafni, sýningum, viðburðum og veitingaaðstöðu. Gott skjól á rólegum degi eða þegar veðrið kallar á inniveru. Athugið dagskrá og opnunartíma.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">10</div>
+        <h3>Dalvíkurströnd og höfnin</h3>
+        <span class="guide-cat">Létt ganga · Dalvík</span>
+        <p>Róleg ganga um höfnina og með strandlengjunni gefur góða tilfinningu fyrir sjávarþorpinu og útsýni yfir Eyjafjörð. Fallegt í morgunbirtu og á björtum sumarkvöldum. Gætið að veðri og farið ekki of nálægt hafnarstarfsemi.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">11</div>
+        <h3>Skíðasvæðið í Böggvisstaðafjalli</h3>
+        <span class="guide-cat">Skíði · Dalvík</span>
+        <p>Skíðasvæði Dalvíkur býður upp á brekkur fyrir ólíka getu og fallegt útsýni yfir Svarfaðardal og Eyjafjörð. Opnun fer eftir snjó, veðri og árstíma, svo skoðið alltaf nýjustu upplýsingar áður en lagt er af stað.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">12</div>
+        <h3>Gönguferðir í Svarfaðardal og Tröllaskaga</h3>
+        <span class="guide-cat">Göngur og náttúra</span>
+        <p>Dalvík er frábær bækistöð fyrir gönguferðir í Svarfaðardal og fjöllum Tröllaskaga. Veljið leið eftir getu, árstíma og veðri. Hafið með ykkur hlý og vatnsheld föt, vatn, nesti og kort og látið einhvern vita af ferðaáætlun. Að vetri skal fara með leiðsögumanni þegar snjóflóðahætta eða vetraraðstæður kalla á sérþekkingu.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">13</div>
+        <h3>Hrísey</h3>
+        <span class="guide-cat">Dagsferð · ferja frá Árskógssandi</span>
+        <p>Hrísey er róleg eyja í Eyjafirði, þekkt fyrir fuglalíf, gönguleiðir og þorpsstemningu. Ferjan siglir frá Árskógssandi. Skoðið áætlun ferjunnar fyrirfram og gefið ykkur tíma til að ganga um eyjuna.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">14</div>
+        <h3>Grímsey</h3>
+        <span class="guide-cat">Heilsdagsferð · ferja frá Dalvík</span>
+        <p>Grímsey liggur við heimskautsbaug og er einstök heilsdagsferð fyrir þá sem vilja upplifa fuglalíf, kletta og afskekkt eyjasamfélag. Ferðin tekur stóran hluta dags og ferjusigling getur verið krefjandi í sjó. Bókið fyrirfram og fylgist með veðri og siglingaáætlun.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">15</div>
+        <h3>Ólafsfjörður og Siglufjörður</h3>
+        <span class="guide-cat">Dagsferð um Tröllaskaga</span>
+        <p>Falleg dagsferð norður frá Dalvík um Ólafsfjörð og Héðinsfjörð til Siglufjarðar. Leiðin liggur um jarðgöng og stórbrotið fjallalandslag. Á Siglufirði er gaman að ganga um miðbæinn og höfnina. Athugið færð og veður áður en ekið er, sérstaklega að vetri.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">16</div>
+        <h3>Arctic Heli Skiing</h3>
+        <span class="guide-cat">Þyrluskíði og fjallaskíði · Tröllaskagi</span>
+        <p>Einstök upplifun fyrir vana skíða- og brettamenn sem vilja kanna fjöll Tröllaskaga með faglegum leiðsögumönnum. Arctic Heli Skiing býður meðal annars upp á þyrluskíði, einkapakka, fjallaskíðaferðir og ferðir þar sem þyrla aðstoðar við aðkomu. Landslagið er stórbrotið og sumar leiðir liggja frá fjallstindum niður að sjó. Bókun, viðeigandi reynsla, búnaður og fullnægjandi tryggingar eru nauðsynleg; kynnið ykkur skilmála og öryggiskröfur beint hjá fyrirtækinu.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">17</div>
+        <h3>Friðland í Svarfaðardal</h3>
+        <span class="guide-cat">Náttúra, fuglaskoðun og róleg útivist · Svarfaðardalur</span>
+        <p>Elsta friðaða votlendissvæði Íslands og mikilvægur viðkomustaður farfugla. Friðlandið einkennist af fjölbreyttu gróðurfari, votlendi og ríkulegu fuglalífi. Fallegt er að aka um Svarfaðardal og njóta útsýnis yfir svæðið. Gott útsýni er meðal annars frá vegaútskoti við Saurbæjartjörn á Skíðadalsvegi. Virðið viðkvæmt lífríki, haldið ykkur á vegum og merktum leiðum og truflið ekki fugla, sérstaklega yfir varptímann.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">18</div>
+        <h3>Skíðasvæðið í Skarðsdal á Siglufirði</h3>
+        <span class="guide-cat">Skíði og vetrarútivist · Siglufjörður</span>
+        <p>Skarðsdalur er fjölbreytt skíðasvæði ofan Siglufjarðar með nokkrum lyftum og brekkum fyrir ólíka getu. Þar er einnig aðstaða fyrir gönguskíði þegar snjó- og veðurskilyrði leyfa. Fallegt er að sameina skíðadaginn við heimsókn í miðbæ og höfn Siglufjarðar. Opnun ræðst af snjó, veðri og snjóflóðaaðstæðum; skoðið alltaf nýjustu upplýsingar á <a href="http://skardsdalur.is/" target="_blank" rel="noopener">skardsdalur.is</a> áður en lagt er af stað.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">19</div>
+        <h3>Hlíðarfjall við Akureyri</h3>
+        <span class="guide-cat">Skíði, hjólreiðar og útivist · Akureyri</span>
+        <p>Hlíðarfjall er stærsta og eitt vinsælasta skíðasvæði landsins, skammt ofan Akureyrar. Þar eru fjölbreyttar skíðabrekkur og gönguskíðaleiðir að vetri. Á sumrin er svæðið nýtt til göngu- og fjallahjólreiða þegar opið er. Útsýnið yfir Akureyri og Eyjafjörð er stórbrotið. Opnun og aðgengi ráðast af árstíma og veðri; skoðið <a href="http://hlidarfjall.is/" target="_blank" rel="noopener">hlidarfjall.is</a> áður en farið er.</p>
+      </div>
+    </div>
   </div>
 </section>
 <section class="location" id="stadsetning">
