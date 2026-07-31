@@ -1,0 +1,78 @@
+---
+import { getCollection, render } from 'astro:content';
+import '../styles/global.css';
+
+const entries = (await getCollection('guidebook')).sort((a, b) => a.data.order - b.data.order);
+const guideItems = await Promise.all(
+  entries.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+  })),
+);
+---
+
+<!doctype html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Frjáls ferðahandbók um Dalvík, Tröllaskaga og Eyjafjörð frá Höfn." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
+    <title>Ferðahandbók Dalvíkur · Höfn</title>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="/" aria-label="Höfn, Dalvík">Höfn <span>· Dalvík</span></a>
+        <nav class="links" aria-label="Aðalvalmynd">
+          <a href="/">Til baka í Höfn</a>
+          <a href="/#fyrirspurn" class="btn">Senda fyrirspurn</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="guide-page">
+      <section class="guide-page-hero">
+        <div class="wrap guide-page-hero__inner">
+          <div class="kicker">Ferðahandbók · frjáls aðgangur</div>
+          <h1>Dalvík, Tröllaskagi og Eyjafjörður</h1>
+          <p>Uppáhaldsstaðir okkar fyrir góðan mat, heita potta, hvalaskoðun, göngur og dagsferðir — allt frá Höfn sem bækistöð.</p>
+          <a class="btn" href="/">Skoða Höfn húsið</a>
+        </div>
+      </section>
+
+      <section class="guidebook guidebook-full">
+        <div class="wrap">
+          <div class="guide-full-intro">
+            <div>
+              <div class="kicker">Allir staðirnir</div>
+              <h2>Handbókin er þín — alveg frítt</h2>
+            </div>
+            <p>Opnunartímar, verð og framboð geta breyst eftir árstíðum. Skoðaðu alltaf nýjustu upplýsingar hjá hverjum stað áður en lagt er af stað.</p>
+          </div>
+          <div class="guide-grid">
+            {guideItems.map(({ entry, Content }) => (
+              <article class="guide-card">
+                <div class="guide-num">{String(entry.data.order).padStart(2, '0')}</div>
+                <h3>{entry.data.title}</h3>
+                <span class="guide-cat">{entry.data.category}</span>
+                <div class="guide-copy"><Content /></div>
+                {entry.data.link && <a class="guide-link" href={entry.data.link} target="_blank" rel="noopener">Skoða vefsíðu <span aria-hidden="true">↗</span></a>}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <div class="brand">Höfn <span>· Dalvík</span></div>
+        <div>Karlsrauðatorg 4, 620 Dalvík · Gistileyfi II</div>
+        <a href="mailto:thordis@manifesto.is">thordis@manifesto.is</a>
+      </div>
+    </footer>
+  </body>
+</html>

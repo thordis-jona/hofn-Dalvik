@@ -25,12 +25,7 @@ const [{ Content: HeroContent }, { Content: AboutContent }, { Content: Adventure
 ]);
 
 const guideEntries = (await getCollection('guidebook')).sort((a, b) => a.data.order - b.data.order);
-const guideItems = await Promise.all(
-  guideEntries.map(async (entry) => ({
-    entry,
-    Content: (await render(entry)).Content,
-  })),
-);
+const guidePreviewEntries = guideEntries.slice(0, 5);
 
 const stats = [
   '134,8 fm · 3 hæðir',
@@ -192,7 +187,7 @@ const stats = [
             <div class="kicker">Lausar dagsetningar</div>
             <h2>Skipuleggðu dvölina í rólegheitum</h2>
             <p>Hér sérðu stöðuna á dagatalinu okkar. Veldu lausan komudag og sendu síðan fyrirspurn — við staðfestum dagsetningar og verð beint við þig.</p>
-            <p class="availability-note">Dagatalið samstillist við Airbnb og getur verið allt að nokkrum klukkustundum á eftir nýjustu breytingum.</p>
+            <p class="availability-note">Dagatalið notar 15 mínútna edge-cache og samstillist reglulega við Airbnb. Smelltu á dagsetningu til að opna Airbnb.</p>
           </div>
           <AvailabilityCalendar client:load />
         </div>
@@ -203,20 +198,22 @@ const stats = [
           <div class="section-head guide-intro">
             <div class="kicker">Ferðahandbók</div>
             <h2>Höfn – Dalvík og Tröllaskagi</h2>
-            <p>Velkomin á Dalvík! Hér höfum við tekið saman nokkra af okkar uppáhaldsstöðum í bænum og nágrenninu — góðan mat, sund, hvalaskoðun, útivist og dagsferðir. Dalvík er frábær bækistöð fyrir Tröllaskaga og Eyjafjörð, hvort sem komið er að sumri eða vetri.</p>
+            <p>Velkomin á Dalvík! Hér höfum við tekið saman nokkra af okkar uppáhaldsstöðum í bænum og nágrenninu — góðan mat, sund, hvalaskoðun, útivist og dagsferðir.</p>
             <p class="guide-note">Handbókin er unnin eftir leiðarvísinum sem Thordis skrifaði á Airbnb. Opnunartímar, verð og framboð geta breyst eftir árstíðum; skoðið alltaf vefsíðu viðkomandi staðar áður en lagt er af stað.</p>
           </div>
-          <div class="guide-grid">
-            {guideItems.map(({ entry, Content }) => (
-              <article class="guide-card">
-                <div class="guide-num">{String(entry.data.order).padStart(2, '0')}</div>
-                <h3>{entry.data.title}</h3>
-                <span class="guide-cat">{entry.data.category}</span>
-                <div class="guide-copy"><Content /></div>
-                {entry.data.link && <a class="guide-link" href={entry.data.link} target="_blank" rel="noopener">Skoða vefsíðu <span aria-hidden="true">↗</span></a>}
-              </article>
+          <div class="guide-teaser-list">
+            {guidePreviewEntries.map((entry) => (
+              <a class="guide-teaser-item" href="/dalvik-travel-guide">
+                <span class="guide-num">{String(entry.data.order).padStart(2, '0')}</span>
+                <span>
+                  <strong>{entry.data.title}</strong>
+                  <small>{entry.data.category}</small>
+                </span>
+                <span class="guide-teaser-arrow" aria-hidden="true">↗</span>
+              </a>
             ))}
           </div>
+          <a class="btn guide-cta" href="/dalvik-travel-guide">Lesa alla ferðahandbókina — frítt</a>
         </div>
       </section>
 

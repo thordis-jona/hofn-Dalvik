@@ -14,8 +14,11 @@ import { ResultRpcProvider, useResultQuery } from 'result-rpc/react';
 import { getLocalTimeZone, today, type CalendarDate } from '@internationalized/date';
 import { availabilityClient } from '../lib/availability-client';
 
+const AIRBNB_CALENDAR_URL = 'https://www.airbnb.is/multicalendar/1741447606689818508';
+const AVAILABILITY_STALE_TIME = 15 * 60 * 1000;
+
 function CalendarContent() {
-  const availability = useResultQuery(availabilityClient.availability);
+  const availability = useResultQuery(availabilityClient.availability, {}, { staleTime: AVAILABILITY_STALE_TIME });
   const availabilityData =
     availability.state === 'success'
       ? availability.value
@@ -49,7 +52,8 @@ function CalendarContent() {
         <div className={`availability-status availability-status--${status}`} role="status">
           <span className="availability-status__dot" aria-hidden="true"></span>
           {status === 'loading' && 'Sæki dagatal…'}
-          {status === 'ready' && 'Dagatal uppfært'}
+          {status === 'ready' && availability.fetch === 'fetching' ? 'Samstillir dagatal…' : null}
+          {status === 'ready' && availability.fetch !== 'fetching' && 'Dagatal uppfært'}
           {status === 'error' && 'Gat ekki sótt dagatal'}
         </div>
       </div>
@@ -75,7 +79,10 @@ function CalendarContent() {
             </CalendarGridHeader>
             <CalendarGridBody>
               {(date) => (
-                <CalendarCell date={date}>
+                <CalendarCell
+                  date={date}
+                  onClick={() => window.open(AIRBNB_CALENDAR_URL, '_blank', 'noopener,noreferrer')}
+                >
                   {({ formattedDate }) => <span>{formattedDate}</span>}
                 </CalendarCell>
               )}
