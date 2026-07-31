@@ -2,6 +2,7 @@
 import { getCollection, getEntry, render } from 'astro:content';
 import AvailabilityCalendar from '../components/AvailabilityCalendar';
 import BaseHead from '../components/BaseHead.astro';
+import SiteIcon from '../components/SiteIcon.astro';
 import { adventures, features, gallery, locationPoints, rooms } from '../data/site';
 import '../styles/global.css';
 
@@ -153,7 +154,7 @@ const stats = [
           <div class="feature-grid">
             {features.map(([icon, title, copy]) => (
               <article class="feature-card">
-                <div class="icon" aria-hidden="true">{icon}</div>
+                <div class="icon"><SiteIcon name={icon} /></div>
                 <h3>{title}</h3>
                 <p>{copy}</p>
               </article>
@@ -174,7 +175,7 @@ const stats = [
               <article class="adventure-card">
                 <div class="adventure-wash"></div>
                 <div class="content">
-                  <span class="icon" aria-hidden="true">{icon}</span>
+                  <span class="icon"><SiteIcon name={icon} /></span>
                   <h3>{title}</h3>
                   <p>{copy}</p>
                 </div>
@@ -213,7 +214,7 @@ const stats = [
                   <strong>{entry.data.title}</strong>
                   <small>{entry.data.category}</small>
                 </span>
-                <span class="guide-teaser-arrow" aria-hidden="true">↗</span>
+                <span class="guide-teaser-arrow"><SiteIcon name="arrow-up-right" /></span>
               </a>
             ))}
           </div>
@@ -229,7 +230,7 @@ const stats = [
             <div class="prose"><LocationContent /></div>
             <ul class="loc-list">
               {locationPoints.map(([icon, title, copy]) => (
-                <li><span class="loc-icon" aria-hidden="true">{icon}</span><span><b>{title}</b> {copy}</span></li>
+                <li><span class="loc-icon"><SiteIcon name={icon} /></span><span><b>{title}</b> {copy}</span></li>
               ))}
             </ul>
           </div>

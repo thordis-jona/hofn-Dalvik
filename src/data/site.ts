@@ -73,23 +73,23 @@ export const rooms = [
 ] as const;
 
 export const features = [
-  ['🛠️', 'Fagmannlega uppgert', 'Eingöngu sérfræðingar í uppgerð gamalla húsa komu að vinnunni — burðarvirki, þak, klæðning, gluggar, rafmagn, ofnar, lagnir, gólf og dren allt endurnýjað.'],
-  ['🪵', 'Upprunalegur karakter', 'Gert upp miðað við aldur hússins — nýttir bitar í lofti, upprunalegt gólfefni í stofu og upprunalegi stiginn milli hæða.'],
-  ['🏔️', 'Paradís útivistarfólks', 'Þrjú skíðasvæði í göngufæri, þyrluskíði á Tröllaskaga og snjósleðaferðir að vetri — frábær staðsetning sumar sem vetur.'],
-  ['🛌', 'Gistileyfi II fyrir 8', 'Húsið er með gistileyfi II fyrir 8 manns sem hefur ekki verið nýtt — tilbúið fyrir útleigu.'],
-  ['♨️', 'Tilbúið fyrir heitan pott', 'Lagnir fyrir heitan pott eru þegar til staðar austan við húsið.'],
-  ['🔥', 'Kamína og notalegheit', 'Kamína milli borðstofu og stofu skapar hlýlegt andrúmsloft fyrir kaldar Dalvíkurnætur.'],
+  ['construction', 'Fagmannlega uppgert', 'Eingöngu sérfræðingar í uppgerð gamalla húsa komu að vinnunni — burðarvirki, þak, klæðning, gluggar, rafmagn, ofnar, lagnir, gólf og dren allt endurnýjað.'],
+  ['logs', 'Upprunalegur karakter', 'Gert upp miðað við aldur hússins — nýttir bitar í lofti, upprunalegt gólfefni í stofu og upprunalegi stiginn milli hæða.'],
+  ['mountain-snow', 'Paradís útivistarfólks', 'Þrjú skíðasvæði í göngufæri, þyrluskíði á Tröllaskaga og snjósleðaferðir að vetri — frábær staðsetning sumar sem vetur.'],
+  ['bed-double', 'Gistileyfi II fyrir 8', 'Húsið er með gistileyfi II fyrir 8 manns sem hefur ekki verið nýtt — tilbúið fyrir útleigu.'],
+  ['bath', 'Tilbúið fyrir heitan pott', 'Lagnir fyrir heitan pott eru þegar til staðar austan við húsið.'],
+  ['flame', 'Kamína og notalegheit', 'Kamína milli borðstofu og stofu skapar hlýlegt andrúmsloft fyrir kaldar Dalvíkurnætur.'],
 ] as const;
 
 export const locationPoints = [
-  ['🎿', 'Þrjú skíðasvæði', 'í næsta nágrenni Dalvíkur og Tröllaskaga.'],
-  ['🚁', 'Þyrluskíði', 'á Tröllaskaga — heimsþekkt meðal fjallaskíðafólks.'],
-  ['❄️', 'Snjósleðaparadís', 'á veturna, með greiðum aðgangi að hálendinu.'],
-  ['🌊', 'Eyjafjörður og ströndin', 'í göngufæri, tilvalið fyrir sumarleyfi.'],
+  ['mountain-snow', 'Þrjú skíðasvæði', 'í næsta nágrenni Dalvíkur og Tröllaskaga.'],
+  ['cable-car', 'Þyrluskíði', 'á Tröllaskaga — heimsþekkt meðal fjallaskíðafólks.'],
+  ['snowflake', 'Snjósleðaparadís', 'á veturna, með greiðum aðgangi að hálendinu.'],
+  ['sailboat', 'Eyjafjörður og ströndin', 'í göngufæri, tilvalið fyrir sumarleyfi.'],
 ] as const;
 
 export const adventures = [
-  ['🎿', 'Skíði & fjallaskíði', 'Þrjú skíðasvæði í næsta nágrenni og heimsþekkt fjallaskíðafæri á Tröllaskaga — hlíðarnar taka við beint frá bæjardyrum.'],
-  ['🥾', 'Gönguleiðir', 'Fjölbreyttar gönguleiðir liggja upp í fjöllin og með ströndinni, fyrir bæði styttri kvöldgöngur og lengri dagsferðir.'],
-  ['🐋', 'Hvalaskoðun', 'Eyjafjörður er ein besta hvalaskoðunarslóð landsins — stutt er í bátsferðir út á fjörðinn frá Dalvík.'],
+  ['mountain-snow', 'Skíði & fjallaskíði', 'Þrjú skíðasvæði í næsta nágrenni og heimsþekkt fjallaskíðafæri á Tröllaskaga — hlíðarnar taka við beint frá bæjardyrum.'],
+  ['footprints', 'Gönguleiðir', 'Fjölbreyttar gönguleiðir liggja upp í fjöllin og með ströndinni, fyrir bæði styttri kvöldgöngur og lengri dagsferðir.'],
+  ['waves-horizontal', 'Hvalaskoðun', 'Eyjafjörður er ein besta hvalaskoðunarslóð landsins — stutt er í bátsferðir út á fjörðinn frá Dalvík.'],
 ] as const;

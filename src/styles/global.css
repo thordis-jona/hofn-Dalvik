@@ -130,7 +130,8 @@ section { padding: 90px 0; }
 .features .section-head h2 { color: var(--white); }
 .features .kicker { color: #e8c9a0; }
 .feature-card { border: 1px solid rgb(255 255 255 / 15%); border-radius: 16px; padding: 26px 24px; background: rgb(255 255 255 / 6%); }
-.feature-card .icon { margin-bottom: 14px; font-size: 26px; }
+.feature-card .icon { display: inline-flex; width: 28px; height: 28px; margin-bottom: 14px; color: #e8c9a0; }
+.feature-card .icon svg, .adventure-card .icon svg, .loc-icon svg, .guide-teaser-arrow svg, .guide-link svg { width: 100%; height: 100%; }
 .feature-card h3 { margin-bottom: 8px; color: var(--white); font-family: 'Karla', sans-serif; font-size: 17px; font-weight: 700; }
 .feature-card p { margin: 0; color: rgb(247 242 233 / 85%); font-size: 14.5px; }
 
@@ -141,7 +142,7 @@ section { padding: 90px 0; }
 .adventure-card:nth-child(3) { background: linear-gradient(135deg, var(--wood), var(--rust)); }
 .adventure-wash { position: absolute; inset: 0; background: radial-gradient(circle at 20% 15%, rgb(255 255 255 / 25%), transparent 35%), linear-gradient(0deg, rgb(20 18 15 / 75%), rgb(20 18 15 / 5%) 60%); }
 .adventure-card .content { position: relative; z-index: 1; padding: 26px; color: var(--white); }
-.adventure-card .icon { display: block; margin-bottom: 10px; font-size: 28px; }
+.adventure-card .icon { display: block; width: 30px; height: 30px; margin-bottom: 10px; color: var(--white); }
 .adventure-card h3 { margin-bottom: 6px; font-size: 19px; }
 .adventure-card p { margin: 0; font-size: 14px; opacity: .92; }
 .adventure-note { margin: 22px 0 0; color: #8b8574; font-size: 13.5px; text-align: center; }
@@ -197,7 +198,7 @@ section { padding: 90px 0; }
 .guide-teaser-item:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgb(43 42 38 / 10%); }
 .guide-teaser-item strong { display: block; color: var(--sage-dark); font-family: 'Fraunces', serif; font-size: 17px; line-height: 1.25; }
 .guide-teaser-item small { display: block; margin-top: 8px; color: var(--teal-dark); font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
-.guide-teaser-arrow { align-self: flex-end; color: var(--wood); font-size: 20px; }
+.guide-teaser-arrow { align-self: flex-end; width: 20px; height: 20px; color: var(--wood); }
 .guide-cta { margin-top: 2px; }
 .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .guide-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 24px; background: var(--white); }
@@ -206,7 +207,8 @@ section { padding: 90px 0; }
 .guide-cat { display: block; margin-bottom: 10px; color: var(--teal-dark); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .guide-copy { flex: 1; }
 .guide-copy p { margin: 0; color: #4b483f; font-size: 14px; }
-.guide-link { align-self: flex-start; margin-top: 16px; color: var(--teal-dark); font-size: 13px; font-weight: 700; text-decoration: underline; }
+.guide-link { display: inline-flex; gap: 4px; align-items: center; align-self: flex-start; margin-top: 16px; color: var(--teal-dark); font-size: 13px; font-weight: 700; text-decoration: underline; }
+.guide-link svg { width: 15px; height: 15px; }
 .guide-page-hero { padding: 100px 0 92px; color: var(--white); background: linear-gradient(135deg, var(--teal-dark), var(--sage-dark)); }
 .guide-page-hero__inner { max-width: 860px; }
 .guide-page-hero h1 { max-width: 760px; margin-bottom: 18px; font-size: clamp(38px, 6vw, 68px); line-height: 1.05; }
@@ -231,7 +233,7 @@ section { padding: 90px 0; }
 .loc-list { list-style: none; margin: 28px 0 0; padding: 0; }
 .loc-list li { display: flex; gap: 12px; align-items: flex-start; border-bottom: 1px solid var(--line); padding: 12px 0; font-size: 15px; }
 .loc-list b { color: var(--sage-dark); }
-.loc-icon { flex: 0 0 24px; }
+.loc-icon { display: inline-flex; flex: 0 0 24px; width: 24px; height: 24px; color: var(--teal-dark); }
 .map-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); }
 .map-frame iframe { display: block; width: 100%; height: 420px; border: 0; }
 

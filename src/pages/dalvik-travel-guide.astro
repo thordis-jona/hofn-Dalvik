@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
+import SiteIcon from '../components/SiteIcon.astro';
 import '../styles/global.css';
 
 export const prerender = true;
@@ -64,7 +65,7 @@ const guideItems = await Promise.all(
                 <h3>{entry.data.title}</h3>
                 <span class="guide-cat">{entry.data.category}</span>
                 <div class="guide-copy"><Content /></div>
-                {entry.data.link && <a class="guide-link" href={entry.data.link} target="_blank" rel="noopener">Skoða vefsíðu <span aria-hidden="true">↗</span></a>}
+                {entry.data.link && <a class="guide-link" href={entry.data.link} target="_blank" rel="noopener">Skoða vefsíðu <SiteIcon name="arrow-up-right" /></a>}
               </article>
             ))}
           </div>

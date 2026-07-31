@@ -1,0 +1,44 @@
+---
+import {
+  ArrowUpRight,
+  Bath,
+  BedDouble,
+  CableCar,
+  Construction,
+  Flame,
+  Footprints,
+  House,
+  Logs,
+  MountainSnow,
+  Sailboat,
+  Snowflake,
+  WavesHorizontal,
+} from '@lucide/astro';
+
+const icons = {
+  'arrow-up-right': ArrowUpRight,
+  bath: Bath,
+  'bed-double': BedDouble,
+  'cable-car': CableCar,
+  construction: Construction,
+  flame: Flame,
+  footprints: Footprints,
+  house: House,
+  logs: Logs,
+  'mountain-snow': MountainSnow,
+  sailboat: Sailboat,
+  snowflake: Snowflake,
+  'waves-horizontal': WavesHorizontal,
+} as const;
+
+export type SiteIconName = keyof typeof icons;
+
+interface Props {
+  name: SiteIconName;
+}
+
+const { name } = Astro.props;
+const Icon = icons[name];
+---
+
+<Icon aria-hidden="true" focusable="false" stroke-width={1.8} />
