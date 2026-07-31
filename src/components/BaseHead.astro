@@ -22,6 +22,7 @@ const canonical = new URL(Astro.url.pathname, `${SITE_URL}/`).toString();
 const graph = noindex ? null : buildSiteSchemaGraph({ url: canonical, title, description, pageType });
 ---
 
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
 
 <Seo
