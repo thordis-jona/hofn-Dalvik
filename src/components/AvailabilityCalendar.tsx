@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Button,
   Calendar,
@@ -10,34 +10,23 @@ import {
   CalendarHeading,
   I18nProvider,
 } from 'react-aria-components';
+import { ResultRpcProvider, useResultQuery } from 'result-rpc/react';
 import { getLocalTimeZone, today, type CalendarDate } from '@internationalized/date';
+import { availabilityClient } from '../lib/availability-client';
 
-type AvailabilityResponse = {
-  blocked?: string[];
-  updatedAt?: string;
-  error?: string;
-};
+function CalendarContent() {
+  const availability = useResultQuery(availabilityClient.availability);
+  const availabilityData =
+    availability.state === 'success'
+      ? availability.value
+      : availability.state === 'failure'
+        ? availability.previous
+        : undefined;
+  const blocked = new Set(availabilityData?.blocked ?? []);
+  const status = availability.state === 'failure' ? 'error' : availability.state === 'pending' ? 'loading' : 'ready';
+  const updatedAt = availabilityData?.updatedAt ?? null;
 
-export default function AvailabilityCalendar() {
-  const [blocked, setBlocked] = useState<Set<string>>(new Set());
   const [selectedDate, setSelectedDate] = useState<CalendarDate | null>(null);
-  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
-  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch('/api/availability.json')
-      .then((response) => {
-        if (!response.ok) throw new Error('Availability request failed');
-        return response.json() as Promise<AvailabilityResponse>;
-      })
-      .then((data) => {
-        if (data.error) throw new Error(data.error);
-        setBlocked(new Set(data.blocked ?? []));
-        setUpdatedAt(data.updatedAt ?? null);
-        setStatus('ready');
-      })
-      .catch(() => setStatus('error'));
-  }, []);
 
   function selectDate(date: CalendarDate | null) {
     setSelectedDate(date);
@@ -101,8 +90,16 @@ export default function AvailabilityCalendar() {
           <span><i className="availability-legend__swatch availability-legend__swatch--blocked"></i> Ekki laus</span>
         </div>
         {selectedDate && <p>Komudagur valinn: <strong>{selectedDate.toString()}</strong></p>}
-        {updatedAt && <small>Síðast samstillt {new Date(updatedAt).toLocaleString('is-IS')}</small>}
+        {updatedAt && <small>Síðast samstillt {updatedAt.toLocaleString('is-IS')}</small>}
       </div>
     </div>
+  );
+}
+
+export default function AvailabilityCalendar() {
+  return (
+    <ResultRpcProvider client={availabilityClient}>
+      <CalendarContent />
+    </ResultRpcProvider>
   );
 }

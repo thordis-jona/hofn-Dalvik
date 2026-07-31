@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "hofn-dalvik",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-07-31",
+  "compatibility_flags": [],
+  "workers_dev": true,
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist/client"
+  },
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "hofn-dalvik-media"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "hofn.manifesto.is",
+      "custom_domain": true
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

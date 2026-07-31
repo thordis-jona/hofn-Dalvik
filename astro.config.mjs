@@ -5,6 +5,6 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://hofn.manifesto.is',
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({ configPath: './wrangler.jsonc' }),
   integrations: [react()],
 });
