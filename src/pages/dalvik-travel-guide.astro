@@ -1,6 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
 import '../styles/global.css';
+
+export const prerender = true;
 
 const entries = (await getCollection('guidebook')).sort((a, b) => a.data.order - b.data.order);
 const guideItems = await Promise.all(
@@ -14,13 +17,15 @@ const guideItems = await Promise.all(
 <!doctype html>
 <html lang="is">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Frjáls ferðahandbók um Dalvík, Tröllaskaga og Eyjafjörð frá Höfn." />
+    <BaseHead
+      title="Frjáls ferðahandbók um Dalvík · Höfn"
+      description="Frjáls ferðahandbók frá Höfn um Dalvík, Tröllaskaga og Eyjafjörð — góðan mat, sund, hvalaskoðun, göngur og dagsferðir."
+      pageType="collection"
+      ogImageAlt="Útsýni yfir Dalvík og fjöll Tröllaskaga"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
-    <title>Ferðahandbók Dalvíkur · Höfn</title>
   </head>
   <body>
     <header class="nav">

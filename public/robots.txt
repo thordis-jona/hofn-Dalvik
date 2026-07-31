@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
+Sitemap: https://hofn.manifesto.is/sitemap-index.xml
+Schemamap: https://hofn.manifesto.is/schemamap.xml

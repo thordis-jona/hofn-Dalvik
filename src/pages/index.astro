@@ -1,8 +1,11 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import AvailabilityCalendar from '../components/AvailabilityCalendar';
+import BaseHead from '../components/BaseHead.astro';
 import { adventures, features, gallery, locationPoints, rooms } from '../data/site';
 import '../styles/global.css';
+
+export const prerender = true;
 
 const [hero, about, adventure, location, booking] = await Promise.all([
   getEntry('copy', 'hero'),
@@ -38,13 +41,14 @@ const stats = [
 <!doctype html>
 <html lang="is">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Höfn — fallega uppgert einbýlishús í hjarta Dalvíkur, á milli hafs og fjalla á Tröllaskaga." />
+    <BaseHead
+      title="Höfn í Dalvík · Hús á Tröllaskaga"
+      description="Höfn er fallega uppgert 135 fm hús í hjarta Dalvíkur fyrir allt að átta gesti, á milli hafs og fjalla á Tröllaskaga."
+      ogImageAlt="Stofa og borðstofa í Höfn í Dalvík"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
-    <title>Höfn · Dalvík</title>
   </head>
   <body>
     <header class="nav">
@@ -203,7 +207,7 @@ const stats = [
           </div>
           <div class="guide-teaser-list">
             {guidePreviewEntries.map((entry) => (
-              <a class="guide-teaser-item" href="/dalvik-travel-guide">
+              <a class="guide-teaser-item" href="/dalvik-travel-guide/">
                 <span class="guide-num">{String(entry.data.order).padStart(2, '0')}</span>
                 <span>
                   <strong>{entry.data.title}</strong>
@@ -213,7 +217,7 @@ const stats = [
               </a>
             ))}
           </div>
-          <a class="btn guide-cta" href="/dalvik-travel-guide">Lesa alla ferðahandbókina — frítt</a>
+          <a class="btn guide-cta" href="/dalvik-travel-guide/">Lesa alla ferðahandbókina — frítt</a>
         </div>
       </section>
 

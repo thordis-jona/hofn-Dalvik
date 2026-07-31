@@ -2,6 +2,12 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+const seoSchema = z.object({
+  title: z.string().min(5).max(120).optional(),
+  description: z.string().min(15).max(160).optional(),
+  pageType: z.enum(['website', 'article']).default('website'),
+});
+
 const copy = defineCollection({
   loader: glob({ base: './src/content/copy', pattern: '**/*.md' }),
   schema: z.object({
@@ -9,6 +15,7 @@ const copy = defineCollection({
     title: z.string(),
     imageAlt: z.string().optional(),
     note: z.string().optional(),
+    seo: seoSchema.optional(),
   }),
 });
 
@@ -19,6 +26,7 @@ const guidebook = defineCollection({
     title: z.string(),
     category: z.string(),
     link: z.string().url().optional(),
+    seo: seoSchema.optional(),
   }),
 });
 

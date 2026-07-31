@@ -1,0 +1,43 @@
+---
+import Seo from '@jdevalk/astro-seo-graph/Seo.astro';
+import { buildSiteSchemaGraph, OG_IMAGE_URL, SITE_NAME, SITE_URL } from '../lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  pageType?: 'website' | 'collection';
+  ogImageAlt?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  pageType = 'website',
+  ogImageAlt = 'Höfn í Dalvík',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, `${SITE_URL}/`).toString();
+const graph = noindex ? null : buildSiteSchemaGraph({ url: canonical, title, description, pageType });
+---
+
+<Seo
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogType="website"
+  ogImage={OG_IMAGE_URL}
+  ogImageAlt={ogImageAlt}
+  ogImageWidth={1200}
+  ogImageHeight={675}
+  siteName={SITE_NAME}
+  locale="is_IS"
+  graph={graph}
+  noindex={noindex}
+  extraLinks={[
+    { rel: 'sitemap', href: '/sitemap-index.xml' },
+    { rel: 'alternate', type: 'text/plain', href: '/llms.txt', title: 'LLM site summary' },
+  ]}
+  extraMeta={[{ name: 'author', content: 'Höfn · Dalvík' }]}
+/>
