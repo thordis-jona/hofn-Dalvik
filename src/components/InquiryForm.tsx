@@ -1,68 +1,140 @@
 import { Field, Form, type FormStore, type SubmitHandler, useForm } from '@formisch/react';
-import type { InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import { getLocalTimeZone, today } from '@internationalized/date';
+import { useMemo, type InputHTMLAttributes, type TextareaHTMLAttributes } from 'react';
 import * as v from 'valibot';
 
 function todayIso() {
-  return new Date().toISOString().slice(0, 10);
+  return today(getLocalTimeZone()).toString();
 }
 
-const InquirySchema = v.pipe(
-  v.object({
-    name: v.pipe(
-      v.string(),
-      v.trim(),
-      v.nonEmpty('Skrifaðu nafnið þitt.'),
-      v.minLength(2, 'Nafnið þarf að vera að minnsta kosti 2 stafir.'),
-      v.maxLength(80, 'Nafnið má vera mest 80 stafir.'),
+export interface InquiryFormMessages {
+  validation: {
+    name: {
+      required: string;
+      minLength: string;
+      maxLength: string;
+    };
+    email: {
+      required: string;
+      invalid: string;
+      maxLength: string;
+    };
+    checkin: {
+      invalid: string;
+      past: string;
+    };
+    checkout: {
+      invalid: string;
+    };
+    guests: {
+      range: string;
+    };
+    phone: {
+      maxLength: string;
+    };
+    message: {
+      maxLength: string;
+    };
+    dates: {
+      checkinRequired: string;
+      checkoutRequired: string;
+      checkoutAfterCheckin: string;
+    };
+  };
+  fields: {
+    name: { label: string };
+    email: { label: string };
+    checkin: { label: string };
+    checkout: { label: string };
+    guests: { label: string; placeholder: string };
+    phone: { label: string; placeholder: string };
+    message: { label: string; placeholder: string };
+  };
+  submit: {
+    idle: string;
+    submitting: string;
+  };
+  note: string;
+  email: {
+    subject: string;
+    labels: {
+      name: string;
+      email: string;
+      phone: string;
+      checkin: string;
+      checkout: string;
+      guests: string;
+      message: string;
+    };
+  };
+}
+
+export interface InquiryFormProps {
+  locale: 'is-IS' | 'en-GB';
+  messages: InquiryFormMessages;
+}
+
+function createInquirySchema(messages: InquiryFormMessages['validation']) {
+  return v.pipe(
+    v.object({
+      name: v.pipe(
+        v.string(),
+        v.trim(),
+        v.nonEmpty(messages.name.required),
+        v.minLength(2, messages.name.minLength),
+        v.maxLength(80, messages.name.maxLength),
+      ),
+      email: v.pipe(
+        v.string(),
+        v.trim(),
+        v.nonEmpty(messages.email.required),
+        v.email(messages.email.invalid),
+        v.maxLength(254, messages.email.maxLength),
+      ),
+      checkin: v.pipe(
+        v.string(),
+        v.check((value) => value === '' || /^\d{4}-\d{2}-\d{2}$/.test(value), messages.checkin.invalid),
+        v.check((value) => value === '' || value >= todayIso(), messages.checkin.past),
+      ),
+      checkout: v.pipe(
+        v.string(),
+        v.check((value) => value === '' || /^\d{4}-\d{2}-\d{2}$/.test(value), messages.checkout.invalid),
+      ),
+      guests: v.pipe(
+        v.string(),
+        v.check((value) => value === '' || /^[1-8]$/.test(value), messages.guests.range),
+      ),
+      phone: v.pipe(v.string(), v.trim(), v.maxLength(40, messages.phone.maxLength)),
+      message: v.pipe(v.string(), v.trim(), v.maxLength(2000, messages.message.maxLength)),
+    }),
+    v.forward(
+      v.partialCheck(
+        [['checkin'], ['checkout']],
+        ({ checkin, checkout }) => checkout === '' || checkin !== '',
+        messages.dates.checkinRequired,
+      ),
+      ['checkin'],
     ),
-    email: v.pipe(
-      v.string(),
-      v.trim(),
-      v.nonEmpty('Sláðu inn netfang.'),
-      v.email('Netfangið virðist ekki vera gilt.'),
-      v.maxLength(254, 'Netfangið er of langt.'),
+    v.forward(
+      v.partialCheck(
+        [['checkin'], ['checkout']],
+        ({ checkin, checkout }) => checkin === '' || checkout !== '',
+        messages.dates.checkoutRequired,
+      ),
+      ['checkout'],
     ),
-    checkin: v.pipe(
-      v.string(),
-      v.check((value) => value === '' || /^\d{4}-\d{2}-\d{2}$/.test(value), 'Komudagurinn er ekki gild dagsetning.'),
-      v.check((value) => value === '' || value >= todayIso(), 'Komudagur getur ekki verið liðinn.'),
+    v.forward(
+      v.partialCheck(
+        [['checkin'], ['checkout']],
+        ({ checkin, checkout }) => checkin === '' || checkout === '' || checkout > checkin,
+        messages.dates.checkoutAfterCheckin,
+      ),
+      ['checkout'],
     ),
-    checkout: v.pipe(
-      v.string(),
-      v.check((value) => value === '' || /^\d{4}-\d{2}-\d{2}$/.test(value), 'Brottfarardagurinn er ekki gild dagsetning.'),
-    ),
-    guests: v.pipe(
-      v.string(),
-      v.check((value) => value === '' || /^[1-8]$/.test(value), 'Veldu 1–8 gesti.'),
-    ),
-    phone: v.pipe(v.string(), v.trim(), v.maxLength(40, 'Símanúmerið er of langt.')),
-    message: v.pipe(v.string(), v.trim(), v.maxLength(2000, 'Skilaboðin mega vera mest 2000 stafir.')),
-  }),
-  v.forward(
-    v.partialCheck(
-      [['checkin'], ['checkout']],
-      ({ checkin, checkout }) => checkout === '' || checkin !== '',
-      'Veldu komudag áður en þú velur brottfarardag.',
-    ),
-    ['checkin'],
-  ),
-  v.forward(
-    v.partialCheck(
-      [['checkin'], ['checkout']],
-      ({ checkin, checkout }) => checkin === '' || checkout !== '',
-      'Veldu brottfarardag.',
-    ),
-    ['checkout'],
-  ),
-  v.forward(
-    v.partialCheck(
-      [['checkin'], ['checkout']],
-      ({ checkin, checkout }) => checkin === '' || checkout === '' || checkout > checkin,
-      'Brottfarardagur þarf að vera eftir komudag.',
-    ),
-    ['checkout'],
-  ),
-);
+  );
+}
+
+type InquirySchema = ReturnType<typeof createInquirySchema>;
 
 type FieldErrorProps = {
   id: string;
@@ -87,7 +159,7 @@ type InputFieldProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'aria-describedby' | 'aria-invalid' | 'form' | 'id' | 'name' | 'onBlur' | 'onChange' | 'onFocus'
 > & {
-  form: FormStore<typeof InquirySchema>;
+  form: FormStore<InquirySchema>;
   id: string;
   label: string;
   path: InquiryFieldPath;
@@ -122,7 +194,7 @@ type TextareaFieldProps = Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
   'aria-describedby' | 'aria-invalid' | 'form' | 'id' | 'name' | 'onBlur' | 'onChange' | 'onFocus'
 > & {
-  form: FormStore<typeof InquirySchema>;
+  form: FormStore<InquirySchema>;
   id: string;
   label: string;
   path: readonly ['message'];
@@ -152,18 +224,20 @@ function TextareaField({ form, id, label, path, ...textareaProps }: TextareaFiel
   );
 }
 
-export default function InquiryForm() {
+export default function InquiryForm({ locale, messages }: InquiryFormProps) {
+  const schema = useMemo(() => createInquirySchema(messages.validation), [messages.validation]);
   const inquiryForm = useForm({
-    schema: InquirySchema,
+    schema,
     validate: 'blur',
     revalidate: 'input',
   });
   const minDate = todayIso();
 
-  const submitInquiry: SubmitHandler<typeof InquirySchema> = (values) => {
-    const subject = encodeURIComponent('Fyrirspurn um bókun - Höfn, Karlsrauðatorg 4');
+  const submitInquiry: SubmitHandler<InquirySchema> = (values) => {
+    const subject = encodeURIComponent(messages.email.subject);
+    const labels = messages.email.labels;
     const body = encodeURIComponent(
-      `Nafn: ${values.name}\nNetfang: ${values.email}\nSími: ${values.phone}\nKomudagur: ${values.checkin}\nBrottfarardagur: ${values.checkout}\nFjöldi gesta: ${values.guests}\n\nSkilaboð:\n${values.message}`,
+      `${labels.name}: ${values.name}\n${labels.email}: ${values.email}\n${labels.phone}: ${values.phone}\n${labels.checkin}: ${values.checkin}\n${labels.checkout}: ${values.checkout}\n${labels.guests}: ${values.guests}\n\n${labels.message}:\n${values.message}`,
     );
     window.location.href = `mailto:thordis@manifesto.is?subject=${subject}&body=${body}`;
   };
@@ -171,28 +245,28 @@ export default function InquiryForm() {
   return (
     <Form className="request-form" id="requestForm" of={inquiryForm} onSubmit={submitInquiry}>
       <div className="form-row">
-        <InputField autoComplete="name" form={inquiryForm} id="name" label="Nafn" path={['name']} required type="text" />
-        <InputField autoComplete="email" form={inquiryForm} id="email" inputMode="email" label="Netfang" path={['email']} required type="email" />
+        <InputField autoComplete="name" form={inquiryForm} id="name" label={messages.fields.name.label} path={['name']} required type="text" />
+        <InputField autoComplete="email" form={inquiryForm} id="email" inputMode="email" label={messages.fields.email.label} path={['email']} required type="email" />
       </div>
 
       <div className="form-row">
-        <InputField form={inquiryForm} id="checkin" label="Komudagur" min={minDate} path={['checkin']} suppressHydrationWarning type="date" />
-        <InputField form={inquiryForm} id="checkout" label="Brottfarardagur" min={minDate} path={['checkout']} suppressHydrationWarning type="date" />
+        <InputField form={inquiryForm} id="checkin" label={messages.fields.checkin.label} lang={locale} min={minDate} path={['checkin']} suppressHydrationWarning type="date" />
+        <InputField form={inquiryForm} id="checkout" label={messages.fields.checkout.label} lang={locale} min={minDate} path={['checkout']} suppressHydrationWarning type="date" />
       </div>
 
       <div className="form-row">
-        <InputField form={inquiryForm} id="guests" inputMode="numeric" label="Fjöldi gesta" max="8" min="1" path={['guests']} placeholder="t.d. 6" type="number" />
-        <InputField autoComplete="tel" form={inquiryForm} id="phone" inputMode="tel" label="Símanúmer" path={['phone']} placeholder="t.d. 555 5555" type="tel" />
+        <InputField form={inquiryForm} id="guests" inputMode="numeric" label={messages.fields.guests.label} max="8" min="1" path={['guests']} placeholder={messages.fields.guests.placeholder} type="number" />
+        <InputField autoComplete="tel" form={inquiryForm} id="phone" inputMode="tel" label={messages.fields.phone.label} path={['phone']} placeholder={messages.fields.phone.placeholder} type="tel" />
       </div>
 
       <div className="form-row full">
-        <TextareaField form={inquiryForm} id="message" label="Skilaboð" maxLength={2000} path={['message']} placeholder="Segðu okkur aðeins frá ferðinni þinni..." />
+        <TextareaField form={inquiryForm} id="message" label={messages.fields.message.label} maxLength={2000} path={['message']} placeholder={messages.fields.message.placeholder} />
       </div>
 
       <button className="btn" disabled={inquiryForm.isSubmitting} type="submit">
-        {inquiryForm.isSubmitting ? 'Staðfesti upplýsingar…' : 'Senda fyrirspurn'}
+        {inquiryForm.isSubmitting ? messages.submit.submitting : messages.submit.idle}
       </button>
-      <div className="form-note">Fyrirspurnin opnast sem tölvupóstur til thordis@manifesto.is</div>
+      <div className="form-note">{messages.note}</div>
     </Form>
   );
 }

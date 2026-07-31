@@ -7,15 +7,15 @@ import { createSchemaEndpoint } from '../../lib/seo-routes';
 export const prerender = true;
 
 export const GET = createSchemaEndpoint({
-  entries: () => getCollection('guidebook', ({ id }) => id.startsWith('is/')),
+  entries: () => getCollection('guidebook', ({ id }) => id.startsWith('en/')),
   mapper: (entry) => [
     ...buildSiteSchemaPieces({
-      url: absoluteLocaleUrl('is', 'guide'),
-      title: ui.is.guide.metadata.title,
-      description: ui.is.guide.metadata.description,
+      url: absoluteLocaleUrl('en', 'guide'),
+      title: ui.en.guide.metadata.title,
+      description: ui.en.guide.metadata.description,
       pageType: 'collection',
-      locale: 'is',
+      locale: 'en',
     }),
-    buildGuideEntrySchemaPiece(entry, 'is'),
+    buildGuideEntrySchemaPiece(entry, 'en'),
   ],
 });

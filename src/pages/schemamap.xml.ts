@@ -8,6 +8,8 @@ export const GET = createSchemaMap({
   siteUrl: 'https://hofn.manifesto.is',
   entries: [
     { path: '/.well-known/schema-property', lastModified },
+    { path: '/.well-known/schema-property-en', lastModified },
     { path: '/.well-known/schema-guide', lastModified },
+    { path: '/.well-known/schema-guide-en', lastModified },
   ],
 });

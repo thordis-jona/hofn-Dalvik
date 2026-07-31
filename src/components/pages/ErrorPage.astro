@@ -1,0 +1,35 @@
+---
+import FuzzyRedirect from '@jdevalk/astro-seo-graph/FuzzyRedirect.astro';
+import { localeUrl, type Locale } from '../../i18n/config';
+import { ui } from '../../i18n/ui';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const messages = ui[locale];
+---
+
+<SiteLayout
+  locale={locale}
+  route="notFound"
+  title={messages.error.metadata.title}
+  description={messages.error.metadata.description}
+  noindex
+  showHeader={false}
+  showFooter={false}
+>
+  <main class="error-page">
+    <div class="wrap">
+      <div class="kicker">{messages.error.kicker}</div>
+      <h1>{messages.error.title}</h1>
+      <p>{messages.error.intro}</p>
+      <p class="error-suggestion">
+        <FuzzyRedirect suggestionText={messages.error.suggestion} sitemapUrl={`/sitemap-${locale}.xml`} />
+      </p>
+      <a class="btn" href={localeUrl(locale, 'home')}>{messages.error.homeLabel}</a>
+    </div>
+  </main>
+</SiteLayout>

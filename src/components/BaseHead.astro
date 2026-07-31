@@ -1,5 +1,6 @@
 ---
 import Seo from '@jdevalk/astro-seo-graph/Seo.astro';
+import { absoluteLocaleUrl, localeInfo, type Locale, type RouteKey } from '../i18n/config';
 import { buildSiteSchemaGraph, OG_IMAGE_URL, SITE_NAME, SITE_URL } from '../lib/seo';
 
 interface Props {
@@ -8,6 +9,8 @@ interface Props {
   pageType?: 'website' | 'collection';
   ogImageAlt?: string;
   noindex?: boolean;
+  locale: Locale;
+  route: RouteKey;
 }
 
 const {
@@ -16,10 +19,22 @@ const {
   pageType = 'website',
   ogImageAlt = 'Höfn í Dalvík',
   noindex = false,
+  locale,
+  route,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, `${SITE_URL}/`).toString();
-const graph = noindex ? null : buildSiteSchemaGraph({ url: canonical, title, description, pageType });
+const canonical = absoluteLocaleUrl(locale, route);
+const graph = noindex ? null : buildSiteSchemaGraph({ url: canonical, title, description, pageType, locale });
+const markdownAlternate = route === 'home'
+  ? new URL(locale === 'is' ? '/index.md' : '/en.md', `${SITE_URL}/`).toString()
+  : new URL(`${new URL(canonical).pathname.replace(/\/$/, '')}.md`, `${SITE_URL}/`).toString();
+const alternates = noindex ? undefined : {
+  defaultLocale: 'is',
+  entries: [
+    { hreflang: 'is', href: absoluteLocaleUrl('is', route) },
+    { hreflang: 'en', href: absoluteLocaleUrl('en', route) },
+  ],
+};
 ---
 
 <meta charset="UTF-8" />
@@ -35,12 +50,14 @@ const graph = noindex ? null : buildSiteSchemaGraph({ url: canonical, title, des
   ogImageWidth={1200}
   ogImageHeight={675}
   siteName={SITE_NAME}
-  locale="is_IS"
+  locale={localeInfo[locale].ogLocale}
+  alternates={alternates}
   graph={graph}
   noindex={noindex}
   extraLinks={[
     { rel: 'sitemap', href: '/sitemap-index.xml' },
     { rel: 'alternate', type: 'text/plain', href: '/llms.txt', title: 'LLM site summary' },
+    ...(!noindex ? [{ rel: 'alternate', type: 'text/markdown', href: markdownAlternate }] : []),
   ]}
   extraMeta={[{ name: 'author', content: 'Höfn · Dalvík' }]}
 />

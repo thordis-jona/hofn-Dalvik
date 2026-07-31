@@ -17,13 +17,36 @@ import { AIRBNB_LISTING_URL } from '../lib/site-links';
 
 const AVAILABILITY_STALE_TIME = 15 * 60 * 1000;
 
+export interface AvailabilityCalendarMessages {
+  eyebrow: string;
+  title: string;
+  instructions: string;
+  loadingStatus: string;
+  errorStatus: string;
+  refreshingStatus: string;
+  calendarLabel: string;
+  previousMonthLabel: string;
+  nextMonthLabel: string;
+  legendLabel: string;
+  availableLabel: string;
+  unavailableLabel: string;
+  pastLabel: string;
+  selectedLabel: string;
+  selectedDateLabel: string;
+}
+
+export interface AvailabilityCalendarProps {
+  locale: 'is-IS' | 'en-GB';
+  messages: AvailabilityCalendarMessages;
+}
+
 function airbnbListingUrlForArrival(date: CalendarDate) {
   const url = new URL(AIRBNB_LISTING_URL);
   url.searchParams.set('check_in', date.toString());
   return url.toString();
 }
 
-function CalendarContent() {
+function CalendarContent({ locale, messages }: AvailabilityCalendarProps) {
   const availability = useResultQuery(availabilityClient.availability, {}, { staleTime: AVAILABILITY_STALE_TIME });
   const availabilityData =
     availability.state === 'success'
@@ -36,11 +59,11 @@ function CalendarContent() {
   const status = availability.state === 'failure' ? 'error' : availability.state === 'pending' ? 'loading' : 'ready';
   const statusLabel =
     status === 'loading'
-      ? 'Sæki dagatal…'
+      ? messages.loadingStatus
       : status === 'error'
-        ? 'Gat ekki sótt dagatal'
+        ? messages.errorStatus
         : availability.fetch === 'fetching'
-          ? 'Samstillir dagatal…'
+          ? messages.refreshingStatus
           : null;
 
   const [selectedDate, setSelectedDate] = useState<CalendarDate | null>(null);
@@ -66,9 +89,9 @@ function CalendarContent() {
     <div className="availability-widget">
       <div className="availability-widget__header">
         <div>
-          <span className="room-tag">Lausar dagsetningar</span>
-          <h3>Finndu dagana sem henta</h3>
-          <p>Veldu komudag í dagatalinu. Dökkbeige dagar eru uppteknir eða lokaðir og liðnir dagar eru deyfðir.</p>
+          <span className="room-tag">{messages.eyebrow}</span>
+          <h3>{messages.title}</h3>
+          <p>{messages.instructions}</p>
         </div>
         {statusLabel && (
           <div className={`availability-status availability-status--${status}`} role="status">
@@ -78,9 +101,9 @@ function CalendarContent() {
         )}
       </div>
 
-      <I18nProvider locale="is-IS">
+      <I18nProvider locale={locale}>
         <Calendar
-          aria-label="Lausar dagsetningar fyrir Höfn"
+          aria-label={messages.calendarLabel}
           className="availability-calendar"
           defaultFocusedValue={currentDate}
           firstDayOfWeek="mon"
@@ -90,9 +113,9 @@ function CalendarContent() {
           value={selectedDate}
         >
           <div className="availability-calendar__toolbar">
-            <Button slot="previous" aria-label="Fyrri mánuður">←</Button>
+            <Button slot="previous" aria-label={messages.previousMonthLabel}>←</Button>
             <CalendarHeading />
-            <Button slot="next" aria-label="Næsti mánuður">→</Button>
+            <Button slot="next" aria-label={messages.nextMonthLabel}>→</Button>
           </div>
           <div className="availability-calendar__grid-frame">
             <CalendarGrid weekdayStyle="short">
@@ -115,22 +138,22 @@ function CalendarContent() {
       </I18nProvider>
 
       <div className="availability-widget__footer">
-        <div className="availability-legend" aria-label="Skýringar">
-          <span><i className="availability-legend__swatch availability-legend__swatch--open"></i> Laus</span>
-          <span><i className="availability-legend__swatch availability-legend__swatch--blocked"></i> Ekki laus</span>
-          <span><i className="availability-legend__swatch availability-legend__swatch--past"></i> Liðinn dagur</span>
-          <span><i className="availability-legend__swatch availability-legend__swatch--selected"></i> Valinn dagur</span>
+        <div className="availability-legend" aria-label={messages.legendLabel}>
+          <span><i className="availability-legend__swatch availability-legend__swatch--open"></i> {messages.availableLabel}</span>
+          <span><i className="availability-legend__swatch availability-legend__swatch--blocked"></i> {messages.unavailableLabel}</span>
+          <span><i className="availability-legend__swatch availability-legend__swatch--past"></i> {messages.pastLabel}</span>
+          <span><i className="availability-legend__swatch availability-legend__swatch--selected"></i> {messages.selectedLabel}</span>
         </div>
-        {selectedDate && <p>Komudagur valinn: <strong>{selectedDate.toString()}</strong></p>}
+        {selectedDate && <p>{messages.selectedDateLabel}: <strong>{selectedDate.toString()}</strong></p>}
       </div>
     </div>
   );
 }
 
-export default function AvailabilityCalendar() {
+export default function AvailabilityCalendar(props: AvailabilityCalendarProps) {
   return (
     <ResultRpcProvider client={availabilityClient}>
-      <CalendarContent />
+      <CalendarContent {...props} />
     </ResultRpcProvider>
   );
 }

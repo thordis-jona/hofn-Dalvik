@@ -1,0 +1,299 @@
+---
+import { render } from 'astro:content';
+import AvailabilityCalendar from '../AvailabilityCalendar';
+import AirbnbButton from '../AirbnbButton.astro';
+import InquiryForm from '../InquiryForm';
+import SiteIcon from '../SiteIcon.astro';
+import { siteData } from '../../data/site';
+import { localeInfo, localeUrl, type Locale } from '../../i18n/config';
+import { ui } from '../../i18n/ui';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getCopy, getGuideEntries, validateContentParity } from '../../lib/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+await validateContentParity();
+const { hero, about, adventure, location, booking } = await getCopy(locale);
+
+const [{ Content: HeroContent }, { Content: AboutContent }, { Content: AdventureContent }, { Content: LocationContent }, { Content: BookingContent }] = await Promise.all([
+  render(hero),
+  render(about),
+  render(adventure),
+  render(location),
+  render(booking),
+]);
+
+const guideEntries = await getGuideEntries(locale);
+const guidePreviewEntries = guideEntries.slice(0, 5);
+const messages = ui[locale];
+const data = siteData[locale];
+const gallery = data.gallery;
+const guideUrl = localeUrl(locale, 'guide');
+const sectionIds = {
+  about: messages.home.navigation[0].href.slice(1),
+  gallery: messages.home.navigation[1].href.slice(1),
+  rooms: messages.home.navigation[2].href.slice(1),
+  outdoors: messages.home.navigation[3].href.slice(1),
+  availability: messages.home.navigation[4].href.slice(1),
+  guide: messages.home.navigation[5].href.slice(1),
+  location: messages.home.navigation[6].href.slice(1),
+  inquiry: locale === 'is' ? 'fyrirspurn' : 'enquiry',
+};
+---
+
+<SiteLayout
+  locale={locale}
+  route="home"
+  title={messages.home.metadata.title}
+  description={messages.home.metadata.description}
+  ogImageAlt={messages.home.metadata.ogImageAlt}
+  navigation={messages.home.navigation}
+  brandHref="#top"
+>
+  <main id="top">
+      <section class="hero" style="background-image:url('/images/hofn-06.jpg');" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <div class="hero-eyebrow">{hero.data.kicker}</div>
+          <h1 id="hero-title">{hero.data.title}</h1>
+          <div class="sub"><HeroContent /></div>
+          <div class="stat-row">
+            {messages.home.stats.map((stat) => <div class="stat-pill">{stat}</div>)}
+          </div>
+          <div class="hero-ctas">
+            <AirbnbButton label={messages.airbnb.label} ariaLabel={messages.airbnb.ariaLabel} />
+            <a href={`#${sectionIds.inquiry}`} class="btn outline">{messages.home.inquiryCta}</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro" id={sectionIds.about}>
+        <div class="wrap intro-grid">
+          <div>
+            <div class="kicker">{about.data.kicker}</div>
+            <h2>{about.data.title}</h2>
+            <div class="prose"><AboutContent /></div>
+            <div class="facts" aria-label={messages.home.factsLabel}>
+              {messages.home.facts.map((fact) => (
+                <div class="fact"><div class="n">{fact.value}</div><div class="l">{fact.label}</div></div>
+              ))}
+            </div>
+          </div>
+          <div class="intro-photo">
+            <img src="/images/hofn-02.jpg" alt={about.data.imageAlt} loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery-section" id={sectionIds.gallery}>
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">{messages.home.gallery.kicker}</div>
+            <h2>{messages.home.gallery.title}</h2>
+            <p>{messages.home.gallery.intro}</p>
+          </div>
+          <div class="gallery-grid" id="galleryGrid">
+            {data.gallery.map(([file, alt], index) => (
+              <figure>
+                <button class="gallery-trigger" type="button" data-gallery-index={index} aria-label={`${messages.home.gallery.viewLabel}: ${alt}`}>
+                  <img src={`/images/${file}`} alt={alt} loading="lazy" />
+                </button>
+                <figcaption>{alt}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="rooms" id={sectionIds.rooms}>
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">{messages.home.rooms.kicker}</div>
+            <h2>{messages.home.rooms.title}</h2>
+            <p>{messages.home.rooms.intro}</p>
+          </div>
+          <div class="room-grid">
+            {data.rooms.map((room) => (
+              <article class="room-card">
+                <div class="room-photo"><img src={`/images/${room.image}`} alt={room.alt} loading="lazy" /></div>
+                <div class="room-body">
+                  <span class="room-tag">{room.floor}</span>
+                  <h3>{room.title}</h3>
+                  <ul>{room.details.map((detail) => <li>{detail}</li>)}</ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">{messages.home.features.kicker}</div>
+            <h2>{messages.home.features.title}</h2>
+          </div>
+          <div class="feature-grid">
+            {data.features.map(([icon, title, copy]) => (
+              <article class="feature-card">
+                <div class="icon"><SiteIcon name={icon} /></div>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="adventure" id={sectionIds.outdoors}>
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">{adventure.data.kicker}</div>
+            <h2>{adventure.data.title}</h2>
+            <div class="prose"><AdventureContent /></div>
+          </div>
+          <div class="adventure-grid">
+            {data.adventures.map(([icon, title, copy]) => (
+              <article class="adventure-card">
+                <div class="adventure-wash"></div>
+                <div class="content">
+                  <span class="icon"><SiteIcon name={icon} /></span>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p class="adventure-note">{messages.home.adventureNote}</p>
+        </div>
+      </section>
+
+      <section class="availability" id={sectionIds.availability}>
+        <div class="wrap availability-grid">
+          <div class="section-head availability-intro">
+            <div class="kicker">{messages.home.availability.kicker}</div>
+            <h2>{messages.home.availability.title}</h2>
+            <p>{messages.home.availability.intro}</p>
+            <p class="availability-note">{messages.home.availability.note}</p>
+          </div>
+          <AvailabilityCalendar locale={localeInfo[locale].dateLocale} messages={messages.calendar} client:load />
+        </div>
+      </section>
+
+      <section class="guidebook" id={sectionIds.guide}>
+        <div class="wrap">
+          <div class="section-head guide-intro">
+            <div class="kicker">{messages.home.guide.kicker}</div>
+            <h2>{messages.home.guide.title}</h2>
+            <p>{messages.home.guide.intro}</p>
+            <p class="guide-note">{messages.home.guide.note}</p>
+          </div>
+          <div class="guide-teaser-list">
+            {guidePreviewEntries.map((entry) => (
+              <a class="guide-teaser-item" href={guideUrl}>
+                <span class="guide-num">{String(entry.data.order).padStart(2, '0')}</span>
+                <span>
+                  <strong>{entry.data.title}</strong>
+                  <small>{entry.data.category}</small>
+                </span>
+                <span class="guide-teaser-arrow"><SiteIcon name="arrow-up-right" /></span>
+              </a>
+            ))}
+          </div>
+          <a class="btn guide-cta" href={guideUrl}>{messages.home.guide.cta}</a>
+        </div>
+      </section>
+
+      <section class="location" id={sectionIds.location}>
+        <div class="wrap loc-grid">
+          <div>
+            <div class="kicker">{location.data.kicker}</div>
+            <h2>{location.data.title}</h2>
+            <div class="prose"><LocationContent /></div>
+            <ul class="loc-list">
+              {data.locationPoints.map(([icon, title, copy]) => (
+                <li><span class="loc-icon"><SiteIcon name={icon} /></span><span><b>{title}</b> {copy}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div class="map-frame">
+            <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-18.5450%2C65.9600%2C-18.4950%2C65.9850&amp;layer=mapnik&amp;marker=65.9702%2C-18.5314" loading="lazy" title={messages.home.mapTitle}></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="booking" id={sectionIds.inquiry}>
+        <div class="wrap booking-inner">
+          <div>
+            <div class="kicker booking-kicker">{booking.data.kicker}</div>
+            <h2>{booking.data.title}</h2>
+            <div class="prose booking-copy"><BookingContent /></div>
+            <AirbnbButton label={messages.airbnb.label} ariaLabel={messages.airbnb.ariaLabel} />
+            <div class="contact-line">{messages.home.contactPrefix} <a href="mailto:thordis@manifesto.is">thordis@manifesto.is</a></div>
+          </div>
+          <InquiryForm locale={localeInfo[locale].dateLocale} messages={messages.inquiry} client:load />
+        </div>
+      </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-close" id="lbClose" type="button" aria-label={messages.home.lightbox.close}>✕</button>
+    <button class="lb-prev" id="lbPrev" type="button" aria-label={messages.home.lightbox.previous}>‹</button>
+    <img id="lbImg" src="" alt="" />
+    <button class="lb-next" id="lbNext" type="button" aria-label={messages.home.lightbox.next}>›</button>
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+</SiteLayout>
+
+<script define:vars={{ gallery }}>
+  const images = gallery;
+  const grid = document.getElementById('galleryGrid');
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCap');
+  let current = 0;
+
+  function updateLightbox() {
+    const [file, alt] = images[current];
+    lbImg.src = `/images/${file}`;
+    lbImg.alt = alt;
+    lbCap.textContent = alt;
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+  }
+
+  grid?.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-gallery-index]');
+    if (!trigger) return;
+    current = Number(trigger.dataset.galleryIndex);
+    updateLightbox();
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.getElementById('lbClose').focus();
+  });
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', () => {
+    current = (current - 1 + images.length) % images.length;
+    updateLightbox();
+  });
+  document.getElementById('lbNext').addEventListener('click', () => {
+    current = (current + 1) % images.length;
+    updateLightbox();
+  });
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+    if (event.key === 'ArrowRight') document.getElementById('lbNext').click();
+  });
+
+</script>

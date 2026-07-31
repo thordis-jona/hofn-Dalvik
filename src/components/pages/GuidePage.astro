@@ -1,0 +1,73 @@
+---
+import { render } from 'astro:content';
+import AirbnbButton from '../AirbnbButton.astro';
+import SiteIcon from '../SiteIcon.astro';
+import { localeUrl, type Locale } from '../../i18n/config';
+import { ui } from '../../i18n/ui';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getGuideEntries, validateContentParity } from '../../lib/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+await validateContentParity();
+const entries = await getGuideEntries(locale);
+const guideItems = await Promise.all(
+  entries.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+  })),
+);
+const messages = ui[locale];
+const homeUrl = localeUrl(locale, 'home');
+---
+
+<SiteLayout
+  locale={locale}
+  route="guide"
+  title={messages.guide.metadata.title}
+  description={messages.guide.metadata.description}
+  pageType="collection"
+  ogImageAlt={messages.guide.metadata.ogImageAlt}
+  navigation={[{ href: homeUrl, label: messages.guide.backLabel }]}
+  brandHref={homeUrl}
+>
+  <main class="guide-page">
+      <section class="guide-page-hero">
+        <div class="wrap guide-page-hero__inner">
+          <div class="kicker">{messages.guide.heroKicker}</div>
+          <h1>{messages.guide.heroTitle}</h1>
+          <p>{messages.guide.heroIntro}</p>
+          <AirbnbButton label={messages.airbnb.label} ariaLabel={messages.airbnb.ariaLabel} />
+        </div>
+      </section>
+
+      <section class="guidebook guidebook-full">
+        <div class="wrap">
+          <div class="guide-full-intro">
+            <div>
+              <div class="kicker">{messages.guide.listKicker}</div>
+              <h2>{messages.guide.listTitle}</h2>
+            </div>
+            <p>{messages.guide.listIntro}</p>
+          </div>
+          <div class="guide-grid">
+            {guideItems.map(({ entry, Content }) => (
+              <article class:list={['guide-card', entry.data.image ? 'guide-card--has-image' : '']}>
+                {entry.data.image && <img class="guide-card__image" src={entry.data.image} alt={entry.data.imageAlt ?? entry.data.title} loading="lazy" />}
+                <div class="guide-card__body">
+                  <div class="guide-num">{String(entry.data.order).padStart(2, '0')}</div>
+                  <h3>{entry.data.title}</h3>
+                  <span class="guide-cat">{entry.data.category}</span>
+                  <div class="guide-copy"><Content /></div>
+                  {entry.data.link && <a class="guide-link" href={entry.data.link} target="_blank" rel="noopener">{messages.guide.moreLabel} <SiteIcon name="arrow-up-right" /></a>}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+  </main>
+</SiteLayout>

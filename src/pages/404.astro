@@ -1,30 +1,8 @@
 ---
-import FuzzyRedirect from '@jdevalk/astro-seo-graph/FuzzyRedirect.astro';
-import BaseHead from '../components/BaseHead.astro';
-import '../styles/global.css';
+import ErrorPage from '../components/pages/ErrorPage.astro';
 
 export const prerender = true;
 Astro.response.status = 404;
 ---
 
-<!doctype html>
-<html lang="is">
-  <head>
-    <BaseHead
-      title="Síða fannst ekki · Höfn í Dalvík"
-      description="Síðan sem þú leitar að fannst ekki. Finndu leiðina aftur í Höfn í Dalvík."
-      noindex
-    />
-  </head>
-  <body>
-    <main class="error-page">
-      <div class="wrap">
-        <div class="kicker">404 · Úbbs</div>
-        <h1>Síðan fannst ekki</h1>
-        <p>Slóðin virðist ekki vera til. Prófaðu að fara aftur á forsíðuna.</p>
-        <p class="error-suggestion"><FuzzyRedirect suggestionText="Varstu að leita að" /></p>
-        <a class="btn" href="/">Fara á forsíðu Höfn</a>
-      </div>
-    </main>
-  </body>
-</html>
+<ErrorPage locale="is" />

@@ -8,6 +8,7 @@ import {
   makeIds,
   type GraphEntity,
 } from '@jdevalk/seo-graph-core';
+import { absoluteLocaleUrl, sourceKey, type Locale } from '../i18n/config';
 
 export const SITE_URL = 'https://hofn.manifesto.is';
 export const SITE_NAME = 'Höfn · Dalvík';
@@ -23,15 +24,38 @@ interface PageSchemaOptions {
   title: string;
   description: string;
   pageType?: PageType;
+  locale: Locale;
 }
 
-export function buildSiteSchemaPieces({ url, title, description, pageType = 'website' }: PageSchemaOptions): GraphEntity[] {
+const schemaCopy = {
+  is: {
+    propertyDescription: 'Fallega uppgert einbýlishús í hjarta Dalvíkur fyrir allt að átta gesti.',
+    topics: ['Dalvík', 'Tröllaskagi', 'Eyjafjörður', 'skíði', 'gönguferðir', 'hvalaskoðun'],
+    websiteDescription: 'Upplýsingar um Höfn, gistingu í Dalvík og ferðahandbók um Tröllaskaga.',
+    imageCaption: 'Höfn í Dalvík',
+    homeBreadcrumb: 'Höfn · Dalvík',
+    guideBreadcrumb: 'Ferðahandbók Dalvíkur',
+    guideDescription: (category: string) => `${category} í Dalvík og nágrenni.`,
+  },
+  en: {
+    propertyDescription: 'A beautifully restored house for up to eight guests in the heart of Dalvík, North Iceland.',
+    topics: ['Dalvík', 'Tröllaskagi', 'Eyjafjörður', 'skiing', 'hiking', 'whale watching'],
+    websiteDescription: 'Information about Höfn, accommodation in Dalvík and a free travel guide to Tröllaskagi.',
+    imageCaption: 'Höfn in Dalvík',
+    homeBreadcrumb: 'Höfn · Dalvík',
+    guideBreadcrumb: 'Dalvík travel guide',
+    guideDescription: (category: string) => `${category} in Dalvík and the surrounding area.`,
+  },
+} as const;
+
+export function buildSiteSchemaPieces({ url, title, description, pageType = 'website', locale }: PageSchemaOptions): GraphEntity[] {
+  const copy = schemaCopy[locale];
   const property = buildPiece({
     '@type': 'LodgingBusiness',
     '@id': PROPERTY_ID,
     name: 'Höfn',
     url: `${SITE_URL}/`,
-    description: 'Fallega uppgert einbýlishús í hjarta Dalvíkur fyrir allt að átta gesti.',
+    description: copy.propertyDescription,
     image: { '@id': ids.primaryImage(url) },
     address: {
       '@type': 'PostalAddress',
@@ -42,16 +66,16 @@ export function buildSiteSchemaPieces({ url, title, description, pageType = 'web
     },
     numberOfRooms: 4,
     maximumAttendeeCapacity: 8,
-    knowsAbout: ['Dalvík', 'Tröllaskagi', 'Eyjafjörður', 'skíði', 'gönguferðir', 'hvalaskoðun'],
+    knowsAbout: copy.topics,
   });
 
   const website = buildWebSite(
     {
       url: `${SITE_URL}/`,
       name: SITE_NAME,
-      description: 'Upplýsingar um Höfn, gistingu í Dalvík og ferðahandbók um Tröllaskaga.',
+      description: copy.websiteDescription,
       publisher: { '@id': PROPERTY_ID },
-      inLanguage: 'is',
+      inLanguage: locale,
     },
     ids,
   );
@@ -62,8 +86,8 @@ export function buildSiteSchemaPieces({ url, title, description, pageType = 'web
       url: OG_IMAGE_URL,
       width: 1200,
       height: 675,
-      inLanguage: 'is',
-      caption: 'Höfn í Dalvík',
+      inLanguage: locale,
+      caption: copy.imageCaption,
     },
     ids,
   );
@@ -77,7 +101,7 @@ export function buildSiteSchemaPieces({ url, title, description, pageType = 'web
       breadcrumb: { '@id': ids.breadcrumb(url) },
       primaryImage: { '@id': ids.primaryImage(url) },
       about: { '@id': PROPERTY_ID },
-      inLanguage: 'is',
+      inLanguage: locale,
       isAccessibleForFree: true,
     },
     ids,
@@ -88,8 +112,8 @@ export function buildSiteSchemaPieces({ url, title, description, pageType = 'web
     {
       url,
       items: [
-        { name: 'Höfn · Dalvík', url: `${SITE_URL}/` },
-        ...(pageType === 'collection' ? [{ name: 'Ferðahandbók Dalvíkur', url }] : []),
+        { name: copy.homeBreadcrumb, url: absoluteLocaleUrl(locale, 'home') },
+        ...(pageType === 'collection' ? [{ name: copy.guideBreadcrumb, url }] : []),
       ],
     },
     ids,
@@ -105,15 +129,15 @@ export function buildSiteSchemaGraph(options: PageSchemaOptions) {
 export function buildGuideEntrySchemaPiece(entry: {
   id: string;
   data: { title: string; category: string; link?: string };
-}) {
-  const pageUrl = `${SITE_URL}/dalvik-travel-guide/`;
+}, locale: Locale) {
+  const pageUrl = absoluteLocaleUrl(locale, 'guide');
   return buildPiece({
     '@type': 'CreativeWork',
-    '@id': `${pageUrl}#${entry.id}`,
+    '@id': `${pageUrl}#${locale}-${sourceKey(entry.id)}`,
     name: entry.data.title,
-    description: `${entry.data.category} í Dalvík og nágrenni.`,
+    description: schemaCopy[locale].guideDescription(entry.data.category),
     articleSection: entry.data.category,
-    inLanguage: 'is',
+    inLanguage: locale,
     isPartOf: { '@id': ids.webPage(pageUrl) },
     url: entry.data.link ?? pageUrl,
     isAccessibleForFree: true,

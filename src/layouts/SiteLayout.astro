@@ -1,0 +1,92 @@
+---
+import AirbnbButton from '../components/AirbnbButton.astro';
+import BaseHead from '../components/BaseHead.astro';
+import { localeInfo, localeUrl, locales, type Locale, type RouteKey } from '../i18n/config';
+import { ui } from '../i18n/ui';
+import '../styles/global.css';
+
+interface Props {
+  locale: Locale;
+  route: RouteKey;
+  title: string;
+  description: string;
+  pageType?: 'website' | 'collection';
+  ogImageAlt?: string;
+  noindex?: boolean;
+  navigation?: readonly { href: string; label: string }[];
+  brandHref?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  locale,
+  route,
+  title,
+  description,
+  pageType = 'website',
+  ogImageAlt,
+  noindex = false,
+  navigation = [],
+  brandHref = localeUrl(locale, 'home'),
+  showHeader = true,
+  showFooter = true,
+} = Astro.props;
+
+const messages = ui[locale];
+---
+
+<!doctype html>
+<html lang={localeInfo[locale].htmlLang}>
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      pageType={pageType}
+      ogImageAlt={ogImageAlt}
+      noindex={noindex}
+      locale={locale}
+      route={route}
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    {showHeader && (
+      <header class="nav">
+        <div class="nav-inner">
+          <a class="brand" href={brandHref} aria-label={messages.layout.brandLabel}>Höfn <span>· Dalvík</span></a>
+          <nav class="links" aria-label={messages.layout.mainNavigationLabel}>
+            {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+            <div class="language-switch" aria-label={messages.layout.languageNavigationLabel}>
+              {locales.map((itemLocale) => (
+                <a
+                  href={localeUrl(itemLocale, route)}
+                  lang={localeInfo[itemLocale].htmlLang}
+                  hreflang={localeInfo[itemLocale].htmlLang}
+                  aria-current={itemLocale === locale ? 'page' : undefined}
+                >
+                  {localeInfo[itemLocale].displayName}
+                </a>
+              ))}
+            </div>
+            <AirbnbButton label={messages.airbnb.label} ariaLabel={messages.airbnb.ariaLabel} />
+          </nav>
+        </div>
+      </header>
+    )}
+
+    <slot />
+
+    {showFooter && (
+      <footer>
+        <div class="wrap footer-inner">
+          <div class="brand">Höfn <span>· Dalvík</span></div>
+          <div>{messages.layout.footerAddress}</div>
+          <a href="mailto:thordis@manifesto.is">thordis@manifesto.is</a>
+        </div>
+      </footer>
+    )}
+  </body>
+</html>
