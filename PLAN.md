@@ -1,10 +1,21 @@
 # English localization plan
 
-Status: ready for implementation
+Status: implemented and deployed
 
 Prepared: 2026-07-31
 
+Completed: 2026-07-31
+
 Framework baseline: Astro 7.1.6 (latest stable on npm at the time of this assessment)
+
+Production verification:
+
+- All four public HTML routes return HTTP 200 with the correct language.
+- Unknown Icelandic and English routes return localized HTTP 404 responses.
+- Content parity checks pass for 5 copy pairs and 19 travel-guide pairs.
+- Astro's H1, internal-link, image-alt, metadata-length, and metadata-uniqueness checks pass for all 6 prerendered HTML pages.
+- The sitemap contains the 4 indexable routes with reciprocal language alternates, and `llms.txt` contains exactly those 4 routes.
+- The live Result RPC availability procedure returns the devalue wire format with `updatedAt` decoded as a `Date`.
 
 ## Outcome
 
