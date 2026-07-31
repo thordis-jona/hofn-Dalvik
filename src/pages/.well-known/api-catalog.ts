@@ -1,6 +1,6 @@
 import { createApiCatalog } from '../../lib/seo-routes';
 
-export const prerender = true;
+export const prerender = false;
 
 export const GET = createApiCatalog({
   siteUrl: 'https://hofn.manifesto.is',
@@ -10,6 +10,6 @@ export const GET = createApiCatalog({
   ],
   schemaMap: { path: '/schemamap.xml', serviceDoc: '/' },
   additional: [
-    { anchor: '/api/availability.json', serviceDoc: '/#laust', type: 'application/json' },
+    { anchor: '/api/availability.json', serviceDoc: '/#laust', type: 'https://www.iana.org/assignments/media-types/application/json' },
   ],
 });
