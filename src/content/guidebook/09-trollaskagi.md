@@ -2,8 +2,6 @@
 order: 9
 title: Menningarhúsið Berg
 category: Menning og samfélag · Dalvík
-image: /images/hofn-22.jpg
-imageAlt: Notaleg stofa með smáatriðum í Höfn
 link: https://www.dalvikurbyggd.is/berg
 ---
 

@@ -2,8 +2,6 @@
 order: 1
 title: Gísli, Eiríkur, Helgi – Kaffihús Bakkabræðra
 category: Kaffi og matur · Dalvík
-image: /images/hofn-32.jpg
-imageAlt: Borðstofuborð og stólar í Höfn í Dalvík
 link: https://www.airbnb.is/things-to-do/places/t-g-ChIJXY6KT7e-0kgR3YPdHp3zQh0
 ---
 

@@ -2,8 +2,6 @@
 order: 3
 title: Baccalá Bar
 category: Sjávarréttir · Hauganes · um 12 km frá Dalvík
-image: /images/hofn-04.jpg
-imageAlt: Borðstofa með útsýni úr Höfn
 link: https://www.airbnb.is/things-to-do/places/t-g-ChIJ07VTJ7i-0kgRmzAJDwA90oE
 ---
 

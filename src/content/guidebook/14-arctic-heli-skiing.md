@@ -2,8 +2,6 @@
 order: 14
 title: Grímsey
 category: Dagsferð og eyjalíf · Grímsey
-image: /images/hofn-13.jpg
-imageAlt: Eldhús og borðstofa í Höfn
 link: https://www.northiceland.is/is/afangastadir/eyjar/grimsey
 ---
 

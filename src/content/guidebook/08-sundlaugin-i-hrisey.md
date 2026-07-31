@@ -2,8 +2,6 @@
 order: 8
 title: Bjórböðin
 category: Bjórspa og slökun · Árskógssandur
-image: /images/hofn-02.jpg
-imageAlt: Græn eldhúsinnrétting í Höfn
 link: https://www.bjorbodin.is/
 ---
 

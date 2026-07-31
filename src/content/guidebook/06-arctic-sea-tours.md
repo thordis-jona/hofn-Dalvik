@@ -2,8 +2,6 @@
 order: 6
 title: Hvalaskoðun á Hauganesi
 category: Hvalaskoðun · Hauganes
-image: /images/hofn-05.jpg
-imageAlt: Borðstofa með gluggum í Höfn
 link: https://www.airbnb.is/things-to-do/places/t-g-ChIJS08lSm-90kgRT2sDUd-v9No
 ---
 

@@ -1,0 +1,22 @@
+---
+import SiteIcon from './SiteIcon.astro';
+import { AIRBNB_LISTING_URL } from '../lib/site-links';
+
+interface Props {
+  extraClass?: string;
+}
+
+const { extraClass = '' } = Astro.props;
+const className = ['btn', 'btn-airbnb', extraClass].filter(Boolean).join(' ');
+---
+
+<a
+  href={AIRBNB_LISTING_URL}
+  class={className}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Bóka Höfn á Airbnb (opnast í nýjum flipa)"
+>
+  <span class="btn-airbnb__label">Bóka á Airbnb</span>
+  <SiteIcon name="arrow-up-right" />
+</a>

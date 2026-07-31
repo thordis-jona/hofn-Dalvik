@@ -2,8 +2,6 @@
 order: 5
 title: Arctic Sea Tours
 category: Hvalaskoðun og sjóstangveiði · Dalvíkurhöfn
-image: /images/hofn-23.jpg
-imageAlt: Stofa með útsýni í Höfn
 link: https://www.airbnb.is/things-to-do/places/t-g-ChIJL7Z_z7a-0kgRYcReW1Vp8kg
 ---
 

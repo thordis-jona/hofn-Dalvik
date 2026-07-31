@@ -2,8 +2,6 @@
 order: 18
 title: Skíðasvæðið í Skarðsdal á Siglufirði
 category: Skíði og vetrarútivist · Siglufjörður
-image: /images/hofn-16.jpg
-imageAlt: Bjart svefnherbergi undir súð í Höfn
 link: https://www.skardsdalur.is/
 ---
 

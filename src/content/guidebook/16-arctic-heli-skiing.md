@@ -2,8 +2,6 @@
 order: 16
 title: Arctic Heli Skiing
 category: Þyrluskíði og fjallaskíði · Tröllaskagi
-image: /images/hofn-25.jpg
-imageAlt: Flísalögð sturta í Höfn
 link: https://www.arcticheliskiing.com/
 ---
 

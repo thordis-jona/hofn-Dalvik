@@ -2,8 +2,6 @@
 order: 7
 title: Heitu pottarnir á Hauganesi
 category: Jarðhiti og slökun · Hauganes
-image: /images/hofn-24.jpg
-imageAlt: Sturta og flísar í Höfn
 link: https://www.airbnb.is/things-to-do/places/t-g-ChIJ12obbR-90kgRd-YpmKVomQU
 ---
 

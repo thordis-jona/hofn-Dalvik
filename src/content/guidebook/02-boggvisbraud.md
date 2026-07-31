@@ -2,8 +2,6 @@
 order: 2
 title: Böggvisbrauð
 category: Handverksbakarí og kaffihús · Dalvík/Svarfaðardalur
-image: /images/hofn-27.jpg
-imageAlt: Græn eldhúsinnrétting og viðarborð í Höfn
 link: https://www.facebook.com/Boggvisbraud/
 ---
 

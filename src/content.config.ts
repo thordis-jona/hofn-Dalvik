@@ -25,8 +25,6 @@ const guidebook = defineCollection({
     order: z.number(),
     title: z.string(),
     category: z.string(),
-    image: z.string().min(1),
-    imageAlt: z.string().min(10),
     link: z.string().url().optional(),
     seo: seoSchema.optional(),
   }),

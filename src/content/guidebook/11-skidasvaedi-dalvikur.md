@@ -2,8 +2,6 @@
 order: 11
 title: Skíðasvæðið í Böggvisstaðafjalli
 category: Skíði · Dalvík
-image: /images/hofn-03.jpg
-imageAlt: Borðstofa með teal-lituðum veggjum í Höfn
 link: https://www.airbnb.is/things-to-do/places/t-g-ChIJK7k48M6-0kgRam_B0zjEMNQ
 ---
 

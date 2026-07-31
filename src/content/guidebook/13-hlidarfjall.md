@@ -2,8 +2,6 @@
 order: 13
 title: Hrísey
 category: Dagsferð og slökun · Hrísey
-image: /images/hofn-19.jpg
-imageAlt: Útsýni út um glugga í Höfn
 link: https://www.hrisey.is/
 ---
 

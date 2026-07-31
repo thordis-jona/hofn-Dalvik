@@ -2,8 +2,6 @@
 order: 4
 title: Sundlaug Dalvíkur
 category: Sund og slökun · Dalvík
-image: /images/hofn-07.jpg
-imageAlt: Baðherbergi og handlaug í Höfn
 link: https://www.airbnb.is/things-to-do/places/t-g-ChIJ6fh1Tba-0kgRtGJUogmNPfY
 ---
 
