@@ -2,7 +2,7 @@ import { getCollection } from 'astro:content';
 import { buildGuideEntrySchemaPiece, buildSiteSchemaPieces, SITE_URL } from '../../lib/seo';
 import { createSchemaEndpoint } from '../../lib/seo-routes';
 
-export const prerender = false;
+export const prerender = true;
 
 export const GET = createSchemaEndpoint({
   entries: () => getCollection('guidebook'),
