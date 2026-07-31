@@ -1,0 +1,330 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import { adventures, features, gallery, locationPoints, rooms } from '../data/site';
+import '../styles/global.css';
+
+const [hero, about, adventure, location, booking] = await Promise.all([
+  getEntry('copy', 'hero'),
+  getEntry('copy', 'about'),
+  getEntry('copy', 'adventure'),
+  getEntry('copy', 'location'),
+  getEntry('copy', 'booking'),
+]);
+
+if (!hero || !about || !adventure || !location || !booking) {
+  throw new Error('Required site copy is missing.');
+}
+
+const [{ Content: HeroContent }, { Content: AboutContent }, { Content: AdventureContent }, { Content: LocationContent }, { Content: BookingContent }] = await Promise.all([
+  render(hero),
+  render(about),
+  render(adventure),
+  render(location),
+  render(booking),
+]);
+
+const guideEntries = (await getCollection('guidebook')).sort((a, b) => a.data.order - b.data.order);
+const guideItems = await Promise.all(
+  guideEntries.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+  })),
+);
+
+const stats = [
+  '134,8 fm · 3 hæðir',
+  '4 svefnherbergi',
+  '2 baðherbergi',
+  'Gistir 8 · Gistileyfi II',
+];
+---
+
+<!doctype html>
+<html lang="is">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Höfn — fallega uppgert einbýlishús í hjarta Dalvíkur, á milli hafs og fjalla á Tröllaskaga." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
+    <title>Höfn · Dalvík</title>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Höfn, Dalvík">Höfn <span>· Dalvík</span></a>
+        <nav class="links" aria-label="Aðalvalmynd">
+          <a href="#um-husid">Um húsið</a>
+          <a href="#myndir">Myndir</a>
+          <a href="#herbergi">Herbergjaskipan</a>
+          <a href="#utivist">Útivist</a>
+          <a href="#ferdahandbok">Ferðahandbók</a>
+          <a href="#stadsetning">Staðsetning</a>
+          <a href="#fyrirspurn" class="btn">Senda fyrirspurn</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" style="background-image:url('/images/hofn-06.jpg');" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <div class="hero-eyebrow">{hero.data.kicker}</div>
+          <h1 id="hero-title">{hero.data.title}</h1>
+          <div class="sub"><HeroContent /></div>
+          <div class="stat-row">
+            {stats.map((stat) => <div class="stat-pill">{stat}</div>)}
+          </div>
+          <div class="hero-ctas">
+            <a href="#fyrirspurn" class="btn">Senda fyrirspurn um bókun</a>
+            <a href="#myndir" class="btn outline">Skoða myndir</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro" id="um-husid">
+        <div class="wrap intro-grid">
+          <div>
+            <div class="kicker">{about.data.kicker}</div>
+            <h2>{about.data.title}</h2>
+            <div class="prose"><AboutContent /></div>
+            <div class="facts" aria-label="Helstu upplýsingar">
+              <div class="fact"><div class="n">134,8</div><div class="l">fermetrar</div></div>
+              <div class="fact"><div class="n">3</div><div class="l">hæðir</div></div>
+              <div class="fact"><div class="n">4</div><div class="l">svefnherbergi</div></div>
+              <div class="fact"><div class="n">8</div><div class="l">gestir (gistileyfi II)</div></div>
+            </div>
+          </div>
+          <div class="intro-photo">
+            <img src="/images/hofn-02.jpg" alt={about.data.imageAlt} loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery-section" id="myndir">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">Myndasafn</div>
+            <h2>Andrúmsloftið í húsinu</h2>
+            <p>Smelltu á mynd til að skoða stærri útgáfu.</p>
+          </div>
+          <div class="gallery-grid" id="galleryGrid">
+            {gallery.map(([file, alt], index) => (
+              <figure>
+                <button class="gallery-trigger" type="button" data-gallery-index={index} aria-label={`Skoða: ${alt}`}>
+                  <img src={`/images/${file}`} alt={alt} loading="lazy" />
+                </button>
+                <figcaption>{alt}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="rooms" id="herbergi">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">Herbergjaskipan</div>
+            <h2>Þrjár hæðir, hver með sinn karakter</h2>
+            <p>Rúmgott hús sem hentar vel stórum hópum og fjölskyldum.</p>
+          </div>
+          <div class="room-grid">
+            {rooms.map((room) => (
+              <article class="room-card">
+                <div class="room-photo"><img src={`/images/${room.image}`} alt={room.alt} loading="lazy" /></div>
+                <div class="room-body">
+                  <span class="room-tag">{room.floor}</span>
+                  <h3>{room.title}</h3>
+                  <ul>{room.details.map((detail) => <li>{detail}</li>)}</ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">Sérstaða hússins</div>
+            <h2>Af hverju Höfn?</h2>
+          </div>
+          <div class="feature-grid">
+            {features.map(([icon, title, copy]) => (
+              <article class="feature-card">
+                <div class="icon" aria-hidden="true">{icon}</div>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="adventure" id="utivist">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">{adventure.data.kicker}</div>
+            <h2>{adventure.data.title}</h2>
+            <div class="prose"><AdventureContent /></div>
+          </div>
+          <div class="adventure-grid">
+            {adventures.map(([icon, title, copy]) => (
+              <article class="adventure-card">
+                <div class="adventure-wash"></div>
+                <div class="content">
+                  <span class="icon" aria-hidden="true">{icon}</span>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p class="adventure-note">Veður og aðstæður ráða alltaf för — kynnið ykkur nýjustu upplýsingar áður en lagt er af stað.</p>
+        </div>
+      </section>
+
+      <section class="guidebook" id="ferdahandbok">
+        <div class="wrap">
+          <div class="section-head guide-intro">
+            <div class="kicker">Ferðahandbók</div>
+            <h2>Höfn – Dalvík og Tröllaskagi</h2>
+            <p>Velkomin á Dalvík! Hér höfum við tekið saman nokkra af okkar uppáhaldsstöðum í bænum og nágrenninu — góðan mat, sund, hvalaskoðun, útivist og dagsferðir. Dalvík er frábær bækistöð fyrir Tröllaskaga og Eyjafjörð, hvort sem komið er að sumri eða vetri.</p>
+            <p class="guide-note">Handbókin er unnin eftir leiðarvísinum sem Thordis skrifaði á Airbnb. Opnunartímar, verð og framboð geta breyst eftir árstíðum; skoðið alltaf vefsíðu viðkomandi staðar áður en lagt er af stað.</p>
+          </div>
+          <div class="guide-grid">
+            {guideItems.map(({ entry, Content }) => (
+              <article class="guide-card">
+                <div class="guide-num">{String(entry.data.order).padStart(2, '0')}</div>
+                <h3>{entry.data.title}</h3>
+                <span class="guide-cat">{entry.data.category}</span>
+                <div class="guide-copy"><Content /></div>
+                {entry.data.link && <a class="guide-link" href={entry.data.link} target="_blank" rel="noopener">Skoða vefsíðu <span aria-hidden="true">↗</span></a>}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="location" id="stadsetning">
+        <div class="wrap loc-grid">
+          <div>
+            <div class="kicker">{location.data.kicker}</div>
+            <h2>{location.data.title}</h2>
+            <div class="prose"><LocationContent /></div>
+            <ul class="loc-list">
+              {locationPoints.map(([icon, title, copy]) => (
+                <li><span class="loc-icon" aria-hidden="true">{icon}</span><span><b>{title}</b> {copy}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div class="map-frame">
+            <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-18.5450%2C65.9600%2C-18.4950%2C65.9850&amp;layer=mapnik&amp;marker=65.9702%2C-18.5314" loading="lazy" title="Kort af Dalvík"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="booking" id="fyrirspurn">
+        <div class="wrap booking-inner">
+          <div>
+            <div class="kicker booking-kicker">{booking.data.kicker}</div>
+            <h2>{booking.data.title}</h2>
+            <div class="prose booking-copy"><BookingContent /></div>
+            <div class="contact-line">Eða hafðu beint samband á <a href="mailto:thordis@manifesto.is">thordis@manifesto.is</a></div>
+          </div>
+          <form class="request-form" id="requestForm">
+            <div class="form-row">
+              <div><label for="name">Nafn</label><input type="text" id="name" required /></div>
+              <div><label for="email">Netfang</label><input type="email" id="email" required /></div>
+            </div>
+            <div class="form-row">
+              <div><label for="checkin">Komudagur</label><input type="date" id="checkin" /></div>
+              <div><label for="checkout">Brottfarardagur</label><input type="date" id="checkout" /></div>
+            </div>
+            <div class="form-row">
+              <div><label for="guests">Fjöldi gesta</label><input type="number" id="guests" min="1" max="8" placeholder="t.d. 6" /></div>
+              <div><label for="phone">Símanúmer</label><input type="tel" id="phone" placeholder="t.d. 555 5555" /></div>
+            </div>
+            <div class="form-row full"><div><label for="message">Skilaboð</label><textarea id="message" placeholder="Segðu okkur aðeins frá ferðinni þinni..."></textarea></div></div>
+            <button type="submit" class="btn">Senda fyrirspurn</button>
+            <div class="form-note">Fyrirspurnin opnast sem tölvupóstur til thordis@manifesto.is</div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <div class="brand">Höfn <span>· Dalvík</span></div>
+        <div>Karlsrauðatorg 4, 620 Dalvík · Gistileyfi II</div>
+        <a href="mailto:thordis@manifesto.is">thordis@manifesto.is</a>
+      </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lb-close" id="lbClose" type="button" aria-label="Loka mynd">✕</button>
+      <button class="lb-prev" id="lbPrev" type="button" aria-label="Fyrri mynd">‹</button>
+      <img id="lbImg" src="" alt="" />
+      <button class="lb-next" id="lbNext" type="button" aria-label="Næsta mynd">›</button>
+      <div class="lb-cap" id="lbCap"></div>
+    </div>
+  </body>
+</html>
+
+<script define:vars={{ gallery }}>
+  const images = gallery;
+  const grid = document.getElementById('galleryGrid');
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCap');
+  let current = 0;
+
+  function updateLightbox() {
+    const [file, alt] = images[current];
+    lbImg.src = `/images/${file}`;
+    lbImg.alt = alt;
+    lbCap.textContent = alt;
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+  }
+
+  grid?.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-gallery-index]');
+    if (!trigger) return;
+    current = Number(trigger.dataset.galleryIndex);
+    updateLightbox();
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.getElementById('lbClose').focus();
+  });
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', () => {
+    current = (current - 1 + images.length) % images.length;
+    updateLightbox();
+  });
+  document.getElementById('lbNext').addEventListener('click', () => {
+    current = (current + 1) % images.length;
+    updateLightbox();
+  });
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+    if (event.key === 'ArrowRight') document.getElementById('lbNext').click();
+  });
+
+  document.getElementById('requestForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const value = (id) => document.getElementById(id).value;
+    const subject = encodeURIComponent('Fyrirspurn um bókun - Höfn, Karlsrauðatorg 4');
+    const body = encodeURIComponent(`Nafn: ${value('name')}\nNetfang: ${value('email')}\nSími: ${value('phone')}\nKomudagur: ${value('checkin')}\nBrottfarardagur: ${value('checkout')}\nFjöldi gesta: ${value('guests')}\n\nSkilaboð:\n${value('message')}`);
+    window.location.href = `mailto:thordis@manifesto.is?subject=${subject}&body=${body}`;
+  });
+</script>
