@@ -1,0 +1,10 @@
+  .guidebook{background:var(--cream-2);}
+  .guide-intro{max-width:760px;}
+  .guide-note{font-size:14px;color:#8b8574;margin-top:-4px;}
+  .guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .guide-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:22px 22px 24px;}
+  .guide-card .guide-num{font-family:'Fraunces',serif;font-size:13px;color:var(--wood);font-weight:700;letter-spacing:.02em;margin-bottom:6px;}
+  .guide-card h3{font-size:17px;color:var(--sage-dark);margin-bottom:6px;line-height:1.3;}
+  .guide-cat{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-dark);font-weight:700;margin-bottom:10px;}
+  .guide-card p{font-size:14px;color:#4b483f;margin:0;}
+  .guide-card a{color:var(--teal-dark);text-decoration:underline;}
