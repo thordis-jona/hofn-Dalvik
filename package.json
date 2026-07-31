@@ -10,9 +10,15 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.1.7",
-    "astro": "latest"
+    "@astrojs/react": "^6.0.2",
+    "@internationalized/date": "^3.12.3",
+    "astro": "latest",
+    "react": "^19.2.8",
+    "react-aria-components": "^1.20.0",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260731.1",
     "typescript": "^7.0.2"
   }
 }

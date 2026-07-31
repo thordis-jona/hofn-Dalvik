@@ -144,6 +144,48 @@ section { padding: 90px 0; }
 .adventure-card p { margin: 0; font-size: 14px; opacity: .92; }
 .adventure-note { margin: 22px 0 0; color: #8b8574; font-size: 13.5px; text-align: center; }
 
+/* Availability */
+.availability { background: var(--white); }
+.availability-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: center; }
+.availability-intro { margin-bottom: 0; }
+.availability-intro h2 { margin-bottom: 18px; color: var(--sage-dark); font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; }
+.availability-note { margin-top: 22px !important; color: #8b8574 !important; font-size: 14px !important; }
+.availability-widget { border: 1px solid var(--line); border-radius: 20px; padding: 28px; background: var(--cream-2); box-shadow: var(--shadow); }
+.availability-widget__header { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; margin-bottom: 22px; }
+.availability-widget__header h3 { margin: 0 0 6px; color: var(--sage-dark); font-size: 24px; line-height: 1.15; }
+.availability-widget__header p { max-width: 370px; margin: 0; color: #5c584c; font-size: 14px; }
+.availability-status { display: flex; flex: 0 0 auto; gap: 8px; align-items: center; color: var(--sage-dark); font-size: 12px; font-weight: 700; white-space: nowrap; }
+.availability-status--loading { color: #8b8574; }
+.availability-status--error { color: var(--rust); }
+.availability-status__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); }
+.availability-status--loading .availability-status__dot { background: var(--wood); }
+.availability-status--error .availability-status__dot { background: var(--rust); }
+.availability-calendar { width: 100%; color: var(--charcoal); }
+.availability-calendar__toolbar { display: grid; grid-template-columns: 40px 1fr 40px; gap: 12px; align-items: center; margin-bottom: 16px; }
+.availability-calendar__toolbar .react-aria-Button { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; color: var(--sage-dark); background: var(--white); cursor: pointer; font-size: 20px; }
+.availability-calendar__toolbar .react-aria-Button:hover { color: var(--white); background: var(--sage-dark); }
+.availability-calendar__toolbar .react-aria-Button:focus-visible { outline: 3px solid rgb(169 117 74 / 45%); outline-offset: 2px; }
+.availability-calendar__toolbar .react-aria-Button[slot="next"] { justify-self: end; }
+.react-aria-CalendarHeading { color: var(--sage-dark); font-family: 'Fraunces', serif; font-size: 22px; text-align: center; }
+.react-aria-CalendarGrid { width: 100%; border-collapse: separate; border-spacing: 4px; }
+.react-aria-CalendarHeaderCell { padding-bottom: 8px; color: #8b8574; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+.react-aria-CalendarCell { position: relative; width: 42px; height: 42px; padding: 0; border: 0; border-radius: 50%; color: var(--charcoal); background: transparent; font-size: 14px; text-align: center; cursor: pointer; }
+.react-aria-CalendarCell > span { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; }
+.react-aria-CalendarCell:hover > span { background: rgb(95 111 82 / 14%); }
+.react-aria-CalendarCell[data-today] > span { border: 1px solid var(--sage); }
+.react-aria-CalendarCell[data-selected] > span { color: var(--white); background: var(--sage-dark); }
+.react-aria-CalendarCell[data-unavailable] > span { color: #8b8574; background: rgb(221 211 191 / 62%); cursor: not-allowed; text-decoration: line-through; }
+.react-aria-CalendarCell[data-outside-month] { color: #b7ad9b; }
+.react-aria-CalendarCell[data-focus-visible] { outline: 3px solid rgb(169 117 74 / 45%); outline-offset: 2px; }
+.availability-widget__footer { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-top: 20px; color: #6b6656; font-size: 13px; }
+.availability-widget__footer p { margin: 0; }
+.availability-widget__footer small { color: #8b8574; }
+.availability-legend { display: flex; gap: 14px; }
+.availability-legend span { display: inline-flex; gap: 6px; align-items: center; }
+.availability-legend__swatch { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
+.availability-legend__swatch--open { border: 1px solid var(--sage); background: var(--white); }
+.availability-legend__swatch--blocked { background: var(--line); }
+
 /* Guidebook */
 .guidebook { background: var(--cream-2); }
 .guide-intro { max-width: 760px; }
@@ -207,12 +249,13 @@ footer a { text-decoration: none; }
   .links a:not(.btn) { display: none; }
 }
 @media (max-width: 900px) {
-  .intro-grid, .loc-grid, .booking-inner { grid-template-columns: 1fr; }
+  .intro-grid, .loc-grid, .booking-inner, .availability-grid { grid-template-columns: 1fr; }
   .room-grid, .feature-grid, .adventure-grid, .guide-grid { grid-template-columns: 1fr 1fr; }
   .gallery-grid { columns: 2 200px; }
   .form-row { grid-template-columns: 1fr; }
   section { padding: 60px 0; }
   .intro-photo img { height: 420px; }
+  .availability-intro { max-width: 660px; }
 }
 @media (max-width: 560px) {
   .wrap, .nav-inner, .hero-content { width: min(100% - 36px, 1180px); }
@@ -226,6 +269,11 @@ footer a { text-decoration: none; }
   .hero-content { padding-bottom: 42px; }
   .hero-ctas .btn { width: 100%; }
   .request-form { padding: 24px 18px; }
+  .availability-widget { padding: 20px 14px; }
+  .availability-widget__header { display: block; }
+  .availability-status { margin-top: 16px; }
+  .react-aria-CalendarGrid { border-spacing: 2px; }
+  .react-aria-CalendarCell { width: 38px; height: 38px; }
   .lightbox { padding: 20px; }
   .lb-prev { left: 10px; }
   .lb-next { right: 10px; }
