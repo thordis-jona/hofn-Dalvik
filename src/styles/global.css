@@ -14,9 +14,10 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { overflow-x: clip; scroll-behavior: smooth; }
 body {
   margin: 0;
+  overflow-x: clip;
   color: var(--charcoal);
   background: var(--cream);
   font-family: 'Karla', sans-serif;
@@ -93,6 +94,7 @@ section { padding: 90px 0; }
 /* Intro */
 .intro { background: var(--white); }
 .intro-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; }
+.intro-grid > *, .loc-grid > *, .booking-inner > *, .availability-grid > *, .room-grid > *, .feature-grid > *, .adventure-grid > *, .guide-grid > * { min-width: 0; }
 .intro h2 { margin-bottom: 22px; color: var(--sage-dark); font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; }
 .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
 .fact { border: 1px solid var(--line); border-radius: 14px; padding: 20px 18px; background: var(--cream); }
@@ -150,7 +152,7 @@ section { padding: 90px 0; }
 .availability-intro { margin-bottom: 0; }
 .availability-intro h2 { margin-bottom: 18px; color: var(--sage-dark); font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; }
 .availability-note { margin-top: 22px !important; color: #8b8574 !important; font-size: 14px !important; }
-.availability-widget { border: 1px solid var(--line); border-radius: 20px; padding: 28px; background: var(--cream-2); box-shadow: var(--shadow); }
+.availability-widget { min-width: 0; border: 1px solid var(--line); border-radius: 20px; padding: 28px; background: var(--cream-2); box-shadow: var(--shadow); }
 .availability-widget__header { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; margin-bottom: 22px; }
 .availability-widget__header h3 { margin: 0 0 6px; color: var(--sage-dark); font-size: 24px; line-height: 1.15; }
 .availability-widget__header p { max-width: 370px; margin: 0; color: #5c584c; font-size: 14px; }
@@ -167,9 +169,9 @@ section { padding: 90px 0; }
 .availability-calendar__toolbar .react-aria-Button:focus-visible { outline: 3px solid rgb(169 117 74 / 45%); outline-offset: 2px; }
 .availability-calendar__toolbar .react-aria-Button[slot="next"] { justify-self: end; }
 .react-aria-CalendarHeading { color: var(--sage-dark); font-family: 'Fraunces', serif; font-size: 22px; text-align: center; }
-.react-aria-CalendarGrid { width: 100%; border-collapse: separate; border-spacing: 4px; }
+.react-aria-CalendarGrid { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 4px; }
 .react-aria-CalendarHeaderCell { padding-bottom: 8px; color: #8b8574; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
-.react-aria-CalendarCell { position: relative; width: 42px; height: 42px; padding: 0; border: 0; border-radius: 50%; color: var(--charcoal); background: transparent; font-size: 14px; text-align: center; cursor: pointer; }
+.react-aria-CalendarCell { position: relative; width: auto; height: 42px; padding: 0; border: 0; border-radius: 50%; color: var(--charcoal); background: transparent; font-size: 14px; text-align: center; cursor: pointer; }
 .react-aria-CalendarCell > span { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; }
 .react-aria-CalendarCell:hover > span { background: rgb(95 111 82 / 14%); }
 .react-aria-CalendarCell[data-today] > span { border: 1px solid var(--sage); }
@@ -191,7 +193,7 @@ section { padding: 90px 0; }
 .guide-intro { max-width: 760px; }
 .guide-note { color: #8b8574 !important; font-size: 14px !important; }
 .guide-teaser-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 28px; }
-.guide-teaser-item { display: flex; min-height: 150px; flex-direction: column; justify-content: space-between; border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: var(--white); text-decoration: none; transition: transform .2s, box-shadow .2s; }
+.guide-teaser-item { display: flex; min-width: 0; min-height: 150px; flex-direction: column; justify-content: space-between; border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: var(--white); text-decoration: none; transition: transform .2s, box-shadow .2s; }
 .guide-teaser-item:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgb(43 42 38 / 10%); }
 .guide-teaser-item strong { display: block; color: var(--sage-dark); font-family: 'Fraunces', serif; font-size: 17px; line-height: 1.25; }
 .guide-teaser-item small { display: block; margin-top: 8px; color: var(--teal-dark); font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
@@ -270,6 +272,7 @@ footer a { text-decoration: none; }
 @media (max-width: 1100px) {
   .links { gap: 16px; }
   .links a:not(.btn) { display: none; }
+  .gallery-grid { columns: 3 220px; }
 }
 @media (max-width: 900px) {
   .intro-grid, .loc-grid, .booking-inner, .availability-grid { grid-template-columns: 1fr; }
@@ -284,9 +287,10 @@ footer a { text-decoration: none; }
   .availability-intro { max-width: 660px; }
 }
 @media (max-width: 560px) {
-  .wrap, .nav-inner, .hero-content { width: min(100% - 36px, 1180px); }
+  .wrap, .nav-inner, .hero-content { width: min(calc(100% - 36px), 1180px); }
   .nav-inner { padding: 12px 0; }
-  .links .btn { padding: 9px 15px; font-size: 13px; }
+  .links { gap: 12px; min-width: 0; }
+  .links .btn { padding: 9px 11px; font-size: 12px; white-space: nowrap; }
   .room-grid, .feature-grid, .adventure-grid, .guide-grid { grid-template-columns: 1fr; }
   .facts { gap: 10px; }
   .fact { padding: 15px 13px; }
@@ -298,8 +302,10 @@ footer a { text-decoration: none; }
   .availability-widget { padding: 20px 14px; }
   .availability-widget__header { display: block; }
   .availability-status { margin-top: 16px; }
+  .gallery-grid { columns: 1; }
+  .guide-teaser-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .react-aria-CalendarGrid { border-spacing: 2px; }
-  .react-aria-CalendarCell { width: 38px; height: 38px; }
+  .react-aria-CalendarCell { height: 38px; }
   .lightbox { padding: 20px; }
   .lb-prev { left: 10px; }
   .lb-next { right: 10px; }
