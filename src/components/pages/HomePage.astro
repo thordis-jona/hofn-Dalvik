@@ -32,6 +32,11 @@ const messages = ui[locale];
 const data = siteData[locale];
 const gallery = data.gallery;
 const guideUrl = localeUrl(locale, 'guide');
+const adventureImages = [
+  '/images/guidebook/arctic-heli-skiing.jpg',
+  '/images/guidebook/trollaskagi.jpg',
+  '/images/guidebook/whale-watching-hauganes.jpg',
+] as const;
 const sectionIds = locale === 'is'
   ? {
       about: 'um-husid',
@@ -166,8 +171,8 @@ const sectionIds = locale === 'is'
             <div class="prose"><AdventureContent /></div>
           </div>
           <div class="adventure-grid">
-            {data.adventures.map(([icon, title, copy]) => (
-              <article class="adventure-card">
+            {data.adventures.map(([icon, title, copy], index) => (
+              <article class="adventure-card" style={`background-image: url("${adventureImages[index]}")`}>
                 <div class="adventure-wash"></div>
                 <div class="content">
                   <span class="icon"><SiteIcon name={icon} /></span>

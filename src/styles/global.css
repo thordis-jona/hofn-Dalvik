@@ -175,10 +175,8 @@ section { padding: 90px 0; }
 
 /* Outdoor */
 .adventure { background: var(--white); }
-.adventure-card { position: relative; display: flex; align-items: flex-end; min-height: 300px; overflow: hidden; border-radius: 18px; background: linear-gradient(135deg, var(--sage), var(--teal)); box-shadow: var(--shadow); }
-.adventure-card:nth-child(2) { background: linear-gradient(135deg, var(--teal-dark), var(--sage)); }
-.adventure-card:nth-child(3) { background: linear-gradient(135deg, var(--wood), var(--rust)); }
-.adventure-wash { position: absolute; inset: 0; background: radial-gradient(circle at 20% 15%, rgb(255 255 255 / 25%), transparent 35%), linear-gradient(0deg, rgb(20 18 15 / 75%), rgb(20 18 15 / 5%) 60%); }
+.adventure-card { position: relative; display: flex; align-items: flex-end; min-height: 340px; overflow: hidden; border-radius: 18px; background-color: var(--sage-dark); background-position: center; background-size: cover; box-shadow: var(--shadow); }
+.adventure-wash { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(20 18 15 / 18%) 0%, rgb(20 18 15 / 36%) 45%, rgb(20 18 15 / 90%) 100%); }
 .adventure-card .content { position: relative; z-index: 1; padding: 26px; color: var(--white); }
 .adventure-card .icon { display: block; width: 30px; height: 30px; margin-bottom: 10px; color: var(--white); }
 .adventure-card h3 { margin-bottom: 6px; font-size: 19px; }
