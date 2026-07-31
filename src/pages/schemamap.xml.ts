@@ -7,7 +7,7 @@ const lastModified = new Date('2026-07-31T00:00:00.000Z');
 export const GET = createSchemaMap({
   siteUrl: 'https://hofn.manifesto.is',
   entries: [
-    { path: '/.well-known/schema-site', lastModified },
+    { path: '/.well-known/schema-property', lastModified },
     { path: '/.well-known/schema-guide', lastModified },
   ],
 });

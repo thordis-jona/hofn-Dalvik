@@ -5,7 +5,7 @@ export const prerender = true;
 export const GET = createApiCatalog({
   siteUrl: 'https://hofn.manifesto.is',
   schemaEndpoints: [
-    { path: '/.well-known/schema-site', schemaType: 'LodgingBusiness', serviceDoc: '/' },
+    { path: '/.well-known/schema-property', schemaType: 'LodgingBusiness', serviceDoc: '/' },
     { path: '/.well-known/schema-guide', schemaType: 'CreativeWork', serviceDoc: '/dalvik-travel-guide/' },
   ],
   schemaMap: { path: '/schemamap.xml', serviceDoc: '/' },

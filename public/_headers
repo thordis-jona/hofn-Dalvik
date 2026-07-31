@@ -4,7 +4,7 @@
 /images/*
   Cache-Control: public, max-age=31536000, immutable
 
-/.well-known/schema-site
+/.well-known/schema-property
   Content-Type: application/ld+json
 
 /.well-known/schema-guide
