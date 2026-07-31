@@ -3,6 +3,7 @@ import { getCollection, getEntry, render } from 'astro:content';
 import AvailabilityCalendar from '../components/AvailabilityCalendar';
 import AirbnbButton from '../components/AirbnbButton.astro';
 import BaseHead from '../components/BaseHead.astro';
+import InquiryForm from '../components/InquiryForm';
 import SiteIcon from '../components/SiteIcon.astro';
 import { adventures, features, gallery, locationPoints, rooms } from '../data/site';
 import '../styles/global.css';
@@ -250,23 +251,7 @@ const stats = [
             <AirbnbButton />
             <div class="contact-line">Eða hafðu beint samband á <a href="mailto:thordis@manifesto.is">thordis@manifesto.is</a></div>
           </div>
-          <form class="request-form" id="requestForm">
-            <div class="form-row">
-              <div><label for="name">Nafn</label><input type="text" id="name" required /></div>
-              <div><label for="email">Netfang</label><input type="email" id="email" required /></div>
-            </div>
-            <div class="form-row">
-              <div><label for="checkin">Komudagur</label><input type="date" id="checkin" /></div>
-              <div><label for="checkout">Brottfarardagur</label><input type="date" id="checkout" /></div>
-            </div>
-            <div class="form-row">
-              <div><label for="guests">Fjöldi gesta</label><input type="number" id="guests" min="1" max="8" placeholder="t.d. 6" /></div>
-              <div><label for="phone">Símanúmer</label><input type="tel" id="phone" placeholder="t.d. 555 5555" /></div>
-            </div>
-            <div class="form-row full"><div><label for="message">Skilaboð</label><textarea id="message" placeholder="Segðu okkur aðeins frá ferðinni þinni..."></textarea></div></div>
-            <button type="submit" class="btn">Senda fyrirspurn</button>
-            <div class="form-note">Fyrirspurnin opnast sem tölvupóstur til thordis@manifesto.is</div>
-          </form>
+          <InquiryForm client:load />
         </div>
       </section>
     </main>
@@ -338,11 +323,4 @@ const stats = [
     if (event.key === 'ArrowRight') document.getElementById('lbNext').click();
   });
 
-  document.getElementById('requestForm').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const value = (id) => document.getElementById(id).value;
-    const subject = encodeURIComponent('Fyrirspurn um bókun - Höfn, Karlsrauðatorg 4');
-    const body = encodeURIComponent(`Nafn: ${value('name')}\nNetfang: ${value('email')}\nSími: ${value('phone')}\nKomudagur: ${value('checkin')}\nBrottfarardagur: ${value('checkout')}\nFjöldi gesta: ${value('guests')}\n\nSkilaboð:\n${value('message')}`);
-    window.location.href = `mailto:thordis@manifesto.is?subject=${subject}&body=${body}`;
-  });
 </script>

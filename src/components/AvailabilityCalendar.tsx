@@ -50,8 +50,10 @@ function CalendarContent() {
     if (!date) return;
     const input = document.getElementById('checkin') as HTMLInputElement | null;
     if (input) {
-      input.value = date.toString();
-      input.dispatchEvent(new Event('change', { bubbles: true }));
+      const valueSetter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set;
+      if (valueSetter) valueSetter.call(input, date.toString());
+      else input.value = date.toString();
+      input.dispatchEvent(new Event('input', { bubbles: true }));
     }
   }
 
