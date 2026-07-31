@@ -2,6 +2,9 @@
 order: 18
 title: Skíðasvæðið í Skarðsdal á Siglufirði
 category: Skíði og vetrarútivist · Siglufjörður
+image: /images/guidebook/skardsdalur.jpg
+imageAlt: Fjallalandslag og skíðaleið í Skarðsdal ofan Siglufjarðar
+imageSource: https://www.airbnb.is/s/guidebooks?refinement_paths%5B%5D=/guidebooks/7129742
 link: https://www.skardsdalur.is/
 ---
 
