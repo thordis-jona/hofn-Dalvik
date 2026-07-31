@@ -12,7 +12,7 @@ const availabilityProcedure = server
 const router = server.router({ availability: availabilityProcedure });
 const handler = createFetchHandler({
   router,
-  endpoint: '/api/rpc',
+  endpoint: '/api/rpc/',
   createContext: () => ({}),
 });
 

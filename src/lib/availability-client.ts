@@ -3,5 +3,5 @@ import { appContract } from './availability-contract';
 
 export const availabilityClient = createBrowserClient({
   contract: appContract,
-  transport: fetchTransport({ url: '/api/rpc' }),
+  transport: fetchTransport({ url: '/api/rpc/' }),
 });
