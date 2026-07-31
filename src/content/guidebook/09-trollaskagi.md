@@ -1,7 +1,10 @@
 ---
 order: 9
-title: Tröllaskagi
-category: Göngur og náttúra · Tröllaskagi
+title: Menningarhúsið Berg
+category: Menning og samfélag · Dalvík
+image: /images/hofn-22.jpg
+imageAlt: Notaleg stofa með smáatriðum í Höfn
+link: https://www.dalvikurbyggd.is/berg
 ---
 
-Dalvík er frábær bækistöð fyrir gönguferðir í Svarfaðardal og fjöllum Tröllaskaga. Veljið leið eftir getu, árstíma og veðri. Hafið með ykkur hlý og vatnsheld föt, vatn, nesti og kort og látið einhvern vita af ferðaáætlun. Að vetri skal fara með leiðsögumanni þegar snjóflóðahætta eða vetraraðstæður kalla á sérþekkingu.
+Menningarhúsið Berg er vettvangur fyrir sýningar, viðburði og samfélagsstarf í Dalvíkurbyggð. Skoðið dagskrána meðan á dvöl stendur — þar getur leynst tónleiki, leiksýning eða sýning sem setur ferðina í gott samhengi.

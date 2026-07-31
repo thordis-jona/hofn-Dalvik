@@ -1,7 +1,10 @@
 ---
 order: 14
-title: Arctic Heli Skiing
-category: Þyrluskíði og fjallaskíði · Tröllaskagi
+title: Grímsey
+category: Dagsferð og eyjalíf · Grímsey
+image: /images/hofn-13.jpg
+imageAlt: Eldhús og borðstofa í Höfn
+link: https://www.northiceland.is/is/afangastadir/eyjar/grimsey
 ---
 
-Einstök upplifun fyrir vana skíða- og brettamenn sem vilja kanna fjöll Tröllaskaga með faglegum leiðsögumönnum. Arctic Heli Skiing býður meðal annars upp á þyrluskíði, einkapakka, fjallaskíðaferðir og ferðir þar sem þyrla aðstoðar við aðkomu. Landslagið er stórbrotið og sumar leiðir liggja frá fjallstindum niður að sjó.
+Grímsey liggur á heimskautsbaugnum og er sérstök dagsferð frá Norðurlandi. Kannaðu ferju- og flugáætlanir, gefðu þér tíma til að ganga um eyjuna og njóttu fuglalífsins og sjávarútsýnisins.

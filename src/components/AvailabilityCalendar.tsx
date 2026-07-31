@@ -13,9 +13,15 @@ import {
 import { ResultRpcProvider, useResultQuery } from 'result-rpc/react';
 import { getLocalTimeZone, today, type CalendarDate } from '@internationalized/date';
 import { availabilityClient } from '../lib/availability-client';
+import { AIRBNB_LISTING_URL } from '../lib/site-links';
 
-const AIRBNB_CALENDAR_URL = 'https://www.airbnb.is/multicalendar/1741447606689818508';
 const AVAILABILITY_STALE_TIME = 15 * 60 * 1000;
+
+function airbnbListingUrlForArrival(date: CalendarDate) {
+  const url = new URL(AIRBNB_LISTING_URL);
+  url.searchParams.set('check_in', date.toString());
+  return url.toString();
+}
 
 function CalendarContent() {
   const availability = useResultQuery(availabilityClient.availability, {}, { staleTime: AVAILABILITY_STALE_TIME });
@@ -81,7 +87,7 @@ function CalendarContent() {
               {(date) => (
                 <CalendarCell
                   date={date}
-                  onClick={() => window.open(AIRBNB_CALENDAR_URL, '_blank', 'noopener,noreferrer')}
+                  onClick={() => window.open(airbnbListingUrlForArrival(date), '_blank', 'noopener,noreferrer')}
                 >
                   {({ formattedDate }) => <span>{formattedDate}</span>}
                 </CalendarCell>

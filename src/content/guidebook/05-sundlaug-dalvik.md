@@ -1,7 +1,10 @@
 ---
 order: 5
-title: Sundlaug Dalvík
-category: Sund og slökun · Dalvík
+title: Arctic Sea Tours
+category: Hvalaskoðun og sjóstangveiði · Dalvíkurhöfn
+image: /images/hofn-23.jpg
+imageAlt: Stofa með útsýni í Höfn
+link: https://www.airbnb.is/things-to-do/places/t-g-ChIJL7Z_z7a-0kgRYcReW1Vp8kg
 ---
 
-Góð íslensk sundlaugarupplifun með 25 metra laug, heitum pottum, barnalaug, vatnsrennibraut og eimbaði. Útsýnið til fjallanna gerir sundferðina sérstaklega notalega. Hentar vel bæði eftir útivist og á rólegum fjölskyldudegi.
+Hvalaskoðun frá Dalvíkurhöfn á hefðbundnum eikarbátum. Ferðirnar fara um Eyjafjörð og oft er boðið upp á stutta sjóstangveiði og smökkun á grilluðum afla eftir ferð. Klæðið ykkur vel og bókið fyrirfram, sérstaklega á sumrin.

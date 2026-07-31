@@ -1,13 +1,8 @@
 export const gallery = [
   ['hofn-06.jpg', 'Stofa og borðstofa með útsýni yfir Dalvík'],
-  ['hofn-05.jpg', 'Stofa og borðstofa, kamína í horni'],
-  ['hofn-25.jpg', 'Borðstofa með upprunalegum viðarbitum'],
-  ['hofn-24.jpg', 'Borðstofuborð og stólar'],
   ['hofn-23.jpg', 'Borðstofa, nærmynd'],
   ['hofn-03.jpg', 'Borðstofa með teal-veggjum'],
   ['hofn-04.jpg', 'Borðstofa, útsýni um glugga'],
-  ['hofn-32.jpg', 'Borðstofuborð með bekk og bitum í lofti'],
-  ['hofn-01.jpg', 'Kamína milli stofu og borðstofu'],
   ['hofn-07.jpg', 'Kamína, nærmynd'],
   ['hofn-27.jpg', 'Kamína með pullum'],
   ['hofn-02.jpg', 'Eldhús með grænni innréttingu'],
@@ -18,7 +13,6 @@ export const gallery = [
   ['hofn-13.jpg', 'Útsýni úr borðstofu í eldhús'],
   ['hofn-19.jpg', 'Gengið úr holi inn í eldhús'],
   ['hofn-08.jpg', 'Baðherbergi á 1. hæð'],
-  ['hofn-28.jpg', 'Baðherbergi, önnur hlið'],
   ['hofn-18.jpg', 'Flísalögð sturta'],
   ['hofn-29.jpg', 'Sturta, nærmynd'],
   ['hofn-09.jpg', 'Svefnherbergi í kjallara'],
@@ -31,6 +25,8 @@ export const gallery = [
   ['hofn-31.jpg', 'Tvíbreið rúm í risi'],
   ['hofn-22.jpg', 'Falleg smáatriði í innréttingu'],
   ['hofn-26.jpg', 'Eldhúsgangur í grænum lit'],
+  ['hofn-25.jpg', 'Borðstofa með upprunalegum viðarbitum'],
+  ['hofn-24.jpg', 'Borðstofuborð og stólar'],
 ] as const;
 
 export const rooms = [
@@ -77,7 +73,6 @@ export const features = [
   ['logs', 'Upprunalegur karakter', 'Gert upp miðað við aldur hússins — nýttir bitar í lofti, upprunalegt gólfefni í stofu og upprunalegi stiginn milli hæða.'],
   ['mountain-snow', 'Paradís útivistarfólks', 'Þrjú skíðasvæði í göngufæri, þyrluskíði á Tröllaskaga og snjósleðaferðir að vetri — frábær staðsetning sumar sem vetur.'],
   ['bed-double', 'Gistileyfi II fyrir 8', 'Húsið er með gistileyfi II fyrir 8 manns sem hefur ekki verið nýtt — tilbúið fyrir útleigu.'],
-  ['bath', 'Tilbúið fyrir heitan pott', 'Lagnir fyrir heitan pott eru þegar til staðar austan við húsið.'],
   ['flame', 'Kamína og notalegheit', 'Kamína milli borðstofu og stofu skapar hlýlegt andrúmsloft fyrir kaldar Dalvíkurnætur.'],
 ] as const;
 

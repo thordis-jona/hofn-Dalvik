@@ -68,11 +68,14 @@ const guideItems = await Promise.all(
           <div class="guide-grid">
             {guideItems.map(({ entry, Content }) => (
               <article class="guide-card">
-                <div class="guide-num">{String(entry.data.order).padStart(2, '0')}</div>
-                <h3>{entry.data.title}</h3>
-                <span class="guide-cat">{entry.data.category}</span>
-                <div class="guide-copy"><Content /></div>
-                {entry.data.link && <a class="guide-link" href={entry.data.link} target="_blank" rel="noopener">Skoða vefsíðu <SiteIcon name="arrow-up-right" /></a>}
+                <img class="guide-card__image" src={entry.data.image} alt={entry.data.imageAlt} loading="lazy" />
+                <div class="guide-card__body">
+                  <div class="guide-num">{String(entry.data.order).padStart(2, '0')}</div>
+                  <h3>{entry.data.title}</h3>
+                  <span class="guide-cat">{entry.data.category}</span>
+                  <div class="guide-copy"><Content /></div>
+                  {entry.data.link && <a class="guide-link" href={entry.data.link} target="_blank" rel="noopener">Skoða nánar <SiteIcon name="arrow-up-right" /></a>}
+                </div>
               </article>
             ))}
           </div>

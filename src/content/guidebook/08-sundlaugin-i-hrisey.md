@@ -1,7 +1,10 @@
 ---
 order: 8
-title: Sundlaugin í Hrísey
-category: Dagsferð og slökun · Hrísey
+title: Bjórböðin
+category: Bjórspa og slökun · Árskógssandur
+image: /images/hofn-02.jpg
+imageAlt: Græn eldhúsinnrétting í Höfn
+link: https://www.bjorbodin.is/
 ---
 
-Hrísey er róleg eyja í Eyjafirði, þekkt fyrir fuglalíf, gönguleiðir og þorpsstemningu. Ferjan siglir frá Árskógssandi. Skoðið áætlun ferjunnar fyrirfram og gefið ykkur tíma til að ganga um eyjuna.
+Bjórböðin á Árskógssandi sameina heitt bað, útsýni yfir Eyjafjörð og afslappaða upplifun. Gott er að bóka með fyrirvara og gefa sér tíma fyrir mat eða drykk eftir baðið.

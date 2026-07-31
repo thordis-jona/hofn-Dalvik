@@ -1,8 +1,10 @@
 ---
 order: 13
-title: Hlíðarfjall
-category: Skíði, hjólreiðar og útivist · Akureyri
-link: https://hlidarfjall.is/
+title: Hrísey
+category: Dagsferð og slökun · Hrísey
+image: /images/hofn-19.jpg
+imageAlt: Útsýni út um glugga í Höfn
+link: https://www.hrisey.is/
 ---
 
-Hlíðarfjall er stærsta og eitt vinsælasta skíðasvæði landsins, skammt ofan Akureyrar. Þar eru fjölbreyttar skíðabrekkur og gönguskíðaleiðir að vetri. Á sumrin er svæðið nýtt til göngu- og fjallahjólreiða þegar opið er. Útsýnið yfir Akureyri og Eyjafjörð er stórbrotið.
+Hrísey er róleg eyja í Eyjafirði, þekkt fyrir fuglalíf, gönguleiðir og þorpsstemningu. Ferjan siglir frá Árskógssandi. Skoðaðu áætlun ferjunnar fyrirfram og gefðu þér tíma til að ganga um eyjuna.

@@ -1,7 +1,10 @@
 ---
 order: 4
-title: Svarfaðardalur
-category: Friðland og náttúra · Svarfaðardalur
+title: Sundlaug Dalvíkur
+category: Sund og slökun · Dalvík
+image: /images/hofn-07.jpg
+imageAlt: Baðherbergi og handlaug í Höfn
+link: https://www.airbnb.is/things-to-do/places/t-g-ChIJ6fh1Tba-0kgRtGJUogmNPfY
 ---
 
-Friðland í Svarfaðardal. Friðlandið er elsta friðaða votlendissvæði landsins og hefur mikið náttúruverndargildi vegna fjölbreytts gróðurfars og dýralífs. Svæðið er mikilvægt fyrir fugla, sérstaklega farfugla sem sækja fæðu þangað.
+Góð íslensk sundlaugarupplifun með 25 metra laug, heitum pottum, barnalaug, vatnsrennibraut og eimbaði. Útsýnið til fjallanna gerir sundferðina sérstaklega notalega. Hentar vel bæði eftir útivist og á rólegum fjölskyldudegi.

@@ -1,7 +1,10 @@
 ---
 order: 10
-title: Fjöruböðin
-category: Jarðhiti og slökun · Hauganes
+title: Dalvíkurströnd og höfnin
+category: Strönd og bæjarlíf · Dalvík
+image: /images/hofn-06.jpg
+imageAlt: Stofa og borðstofa með birtu í Höfn
+link: https://www.northiceland.is/is/afangastadir/baeir-thorp/dalvik
 ---
 
-Heitir pottar við svarta strönd með útsýni yfir Eyjafjörð og fjöllin. Einföld og eftirminnileg upplifun í litlu sjávarþorpi. Gott er að hafa með sér sundföt og handklæði og kanna opnun og greiðslufyrirkomulag áður en farið er.
+Dalvíkurströndin og höfnin eru í góðu göngufæri frá Höfn. Gakktu meðfram sjónum, fylgstu með bátunum og njóttu útsýnisins yfir Eyjafjörð og fjöllin á Tröllaskaga.

@@ -1,7 +1,10 @@
 ---
 order: 7
-title: Whale Watching Hauganes
-category: Hvalaskoðun · Hauganes
+title: Heitu pottarnir á Hauganesi
+category: Jarðhiti og slökun · Hauganes
+image: /images/hofn-24.jpg
+imageAlt: Sturta og flísar í Höfn
+link: https://www.airbnb.is/things-to-do/places/t-g-ChIJ12obbR-90kgRd-YpmKVomQU
 ---
 
-Hauganes er lítið sjávarþorp skammt sunnan Dalvíkur og þar starfar elsta hvalaskoðunarfyrirtæki landsins. Góð leið til að upplifa Eyjafjörð og fallegt þorpsumhverfi í sömu ferð.
+Heitir pottar við svarta strönd með útsýni yfir Eyjafjörð og fjöllin. Einföld og eftirminnileg upplifun í litlu sjávarþorpi. Gott er að hafa með sér sundföt og handklæði og kanna opnun og greiðslufyrirkomulag áður en farið er.
