@@ -32,6 +32,7 @@ function CalendarContent() {
         ? availability.previous
         : undefined;
   const blocked = new Set(availabilityData?.blocked ?? []);
+  const currentDate = today(getLocalTimeZone());
   const status = availability.state === 'failure' ? 'error' : availability.state === 'pending' ? 'loading' : 'ready';
   const statusLabel =
     status === 'loading'
@@ -54,13 +55,18 @@ function CalendarContent() {
     }
   }
 
+  function openAirbnbForArrival(date: CalendarDate) {
+    if (date.compare(currentDate) < 0 || blocked.has(date.toString())) return;
+    window.open(airbnbListingUrlForArrival(date), '_blank', 'noopener,noreferrer');
+  }
+
   return (
     <div className="availability-widget">
       <div className="availability-widget__header">
         <div>
           <span className="room-tag">Lausar dagsetningar</span>
           <h3>Finndu dagana sem henta</h3>
-          <p>Veldu komudag í dagatalinu. Dökkbeige dagar eru þegar uppteknir eða lokaðir.</p>
+          <p>Veldu komudag í dagatalinu. Dökkbeige dagar eru uppteknir eða lokaðir og liðnir dagar eru deyfðir.</p>
         </div>
         {statusLabel && (
           <div className={`availability-status availability-status--${status}`} role="status">
@@ -74,9 +80,10 @@ function CalendarContent() {
         <Calendar
           aria-label="Lausar dagsetningar fyrir Höfn"
           className="availability-calendar"
-          defaultFocusedValue={today(getLocalTimeZone())}
+          defaultFocusedValue={currentDate}
           firstDayOfWeek="mon"
           isDateUnavailable={(date) => blocked.has(date.toString())}
+          minValue={currentDate}
           onChange={selectDate}
           value={selectedDate}
         >
@@ -94,7 +101,7 @@ function CalendarContent() {
                 {(date) => (
                   <CalendarCell
                     date={date}
-                    onClick={() => window.open(airbnbListingUrlForArrival(date), '_blank', 'noopener,noreferrer')}
+                    onClick={() => openAirbnbForArrival(date)}
                   >
                     {({ formattedDate }) => <span>{formattedDate}</span>}
                   </CalendarCell>
@@ -109,6 +116,7 @@ function CalendarContent() {
         <div className="availability-legend" aria-label="Skýringar">
           <span><i className="availability-legend__swatch availability-legend__swatch--open"></i> Laus</span>
           <span><i className="availability-legend__swatch availability-legend__swatch--blocked"></i> Ekki laus</span>
+          <span><i className="availability-legend__swatch availability-legend__swatch--past"></i> Liðinn dagur</span>
           <span><i className="availability-legend__swatch availability-legend__swatch--selected"></i> Valinn dagur</span>
         </div>
         {selectedDate && <p>Komudagur valinn: <strong>{selectedDate.toString()}</strong></p>}
