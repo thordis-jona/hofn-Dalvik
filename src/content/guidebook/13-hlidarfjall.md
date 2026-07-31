@@ -2,6 +2,9 @@
 order: 13
 title: Hrísey
 category: Dagsferð og slökun · Hrísey
+image: /images/guidebook/hrisey.jpg
+imageAlt: Loftmynd af Hrísey og höfninni í Eyjafirði
+imageSource: https://www.hrisey.is/
 link: https://www.hrisey.is/
 ---
 

@@ -2,6 +2,9 @@
 order: 8
 title: Bjórböðin
 category: Bjórspa og slökun · Árskógssandur
+image: /images/guidebook/bjorbodin.webp
+imageAlt: Útisvæði Bjórbaðanna með heitum pottum og fjöllum í baksýn
+imageSource: https://www.bjorbodin.is/
 link: https://www.bjorbodin.is/
 ---
 

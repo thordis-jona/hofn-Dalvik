@@ -2,6 +2,9 @@
 order: 2
 title: Böggvisbrauð
 category: Handverksbakarí og kaffihús · Dalvík/Svarfaðardalur
+image: /images/guidebook/boggvisbraud.jpg
+imageAlt: Nýbakað súrdeigsbrauð frá Böggvisbrauði
+imageSource: https://www.facebook.com/Boggvisbraud/
 link: https://www.facebook.com/Boggvisbraud/
 ---
 

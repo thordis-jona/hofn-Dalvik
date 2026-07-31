@@ -2,6 +2,9 @@
 order: 15
 title: Ólafsfjörður og Siglufjörður
 category: Bæir, saga og fjöll · Tröllaskagi
+image: /images/guidebook/siglufjordur.jpg
+imageAlt: Loftmynd af Siglufirði við fjörðinn
+imageSource: https://www.northiceland.is/is/afangastadir/baeir-thorp/siglufjordur
 link: https://www.northiceland.is/is/afangastadir/baeir-thorp/siglufjordur
 ---
 

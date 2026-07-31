@@ -2,6 +2,9 @@
 order: 19
 title: Hlíðarfjall við Akureyri
 category: Skíði, hjólreiðar og útivist · Akureyri
+image: /images/guidebook/hlidarfjall.jpg
+imageAlt: Hjólreiðamaður á fjallastíg við Hlíðarfjall
+imageSource: https://www.hlidarfjall.is/
 link: https://www.hlidarfjall.is/
 ---
 

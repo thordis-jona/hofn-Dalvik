@@ -61,7 +61,8 @@ const guideItems = await Promise.all(
           </div>
           <div class="guide-grid">
             {guideItems.map(({ entry, Content }) => (
-              <article class="guide-card">
+              <article class:list={['guide-card', entry.data.image ? 'guide-card--has-image' : '']}>
+                {entry.data.image && <img class="guide-card__image" src={entry.data.image} alt={entry.data.imageAlt ?? entry.data.title} loading="lazy" />}
                 <div class="guide-card__body">
                   <div class="guide-num">{String(entry.data.order).padStart(2, '0')}</div>
                   <h3>{entry.data.title}</h3>
