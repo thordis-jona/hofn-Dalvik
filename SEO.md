@@ -36,7 +36,7 @@ Implemented a linked graph in `src/lib/seo.ts` containing:
 
 - `LodgingBusiness` for Höfn, including address, capacity, room count, image, and local topics.
 - `WebSite`, `WebPage`/`CollectionPage`, `ImageObject`, and `BreadcrumbList` entities with stable `@id` references.
-- Corpus endpoints at `/schema/site.json` and `/schema/guide.json`.
+- Corpus endpoints at `/schema/site` and `/schema/guide` (both return `application/ld+json`).
 - `/schemamap.xml` and `/.well-known/api-catalog` for machine discovery.
 
 Remaining: validate the graph externally in Google Rich Results Test and ClassySchema after the production domain resolves. Business facts such as phone number, price range, and booking provider should only be added once confirmed.
@@ -78,7 +78,7 @@ Implemented:
 
 - Build-generated `/llms.txt` lists the two indexable pages.
 - `/index.md` and `/dalvik-travel-guide.md` provide clean Markdown alternates.
-- `/schema/*.json`, `/schemamap.xml`, and `/.well-known/api-catalog` expose the structured corpus.
+- `/schema/site`, `/schema/guide`, `/schemamap.xml`, and `/.well-known/api-catalog` expose the structured corpus.
 - `public/_headers` declares discovery `Link` headers, immutable asset caching, and `No-Vary-Search` for tracking parameters.
 
 The route wrappers in `src/lib/seo-routes.ts` intentionally mirror the package wire formats. They are edge-safe because the package barrel also imports Node-only build utilities that Cloudflare’s prerender worker cannot load.
