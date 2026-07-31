@@ -1,7 +1,7 @@
 import { buildSiteSchemaPieces, SITE_URL } from '../../lib/seo';
 import { createSchemaEndpoint } from '../../lib/seo-routes';
 
-export const prerender = true;
+export const prerender = false;
 
 const entries = async () => [{ id: 'site' }];
 
