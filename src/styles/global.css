@@ -314,7 +314,9 @@ textarea { min-height: 90px; resize: vertical; }
 
 /* Footer and lightbox */
 footer { padding: 40px 0; color: rgb(247 242 233 / 70%); background: var(--charcoal); font-size: 13.5px; }
-.footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+.footer-inner { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; justify-content: space-between; }
+.footer-details { display: grid; gap: 2px; text-align: center; }
+.footer-licence { color: rgb(247 242 233 / 88%); }
 footer .brand { color: var(--cream); font-size: 18px; }
 footer a { text-decoration: none; }
 .lightbox { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 40px; background: rgb(20 18 15 / 94%); }

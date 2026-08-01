@@ -14,6 +14,7 @@ interface SiteMessages {
     mainNavigationLabel: string;
     languageNavigationLabel: string;
     footerAddress: string;
+    footerLicence: string;
   };
   airbnb: {
     label: string;
@@ -65,7 +66,8 @@ export const ui = {
       brandLabel: 'Höfn, Dalvík',
       mainNavigationLabel: 'Aðalvalmynd',
       languageNavigationLabel: 'Tungumál',
-      footerAddress: 'Karlsrauðatorg 4, 620 Dalvík · Gistileyfi II',
+      footerAddress: 'Karlsrauðatorg 4, 620 Dalvík · Gististaður II-C',
+      footerLicence: 'Leyfishafi: Manifesto ehf. · Leyfisnúmer: REK-2023-042974',
     },
     airbnb: {
       label: 'Bóka á Airbnb',
@@ -190,7 +192,8 @@ export const ui = {
       brandLabel: 'Höfn, Dalvík',
       mainNavigationLabel: 'Main navigation',
       languageNavigationLabel: 'Language',
-      footerAddress: 'Karlsrauðatorg 4, 620 Dalvík · Category II accommodation licence',
+      footerAddress: 'Karlsrauðatorg 4, 620 Dalvík · Category II-C guest accommodation',
+      footerLicence: 'Licence holder: Manifesto ehf. · Licence no. REK-2023-042974',
     },
     airbnb: {
       label: 'Book on Airbnb',
