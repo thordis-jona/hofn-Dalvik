@@ -1,0 +1,65 @@
+---
+interface Props { locale: 'is' | 'en'; }
+const { locale } = Astro.props;
+const copy = locale === 'is'
+  ? { text: 'Við notum Google Analytics til að sjá hvernig vefurinn er notaður. Engar mælingar hefjast fyrr en þú samþykkir.', accept: 'Samþykkja', reject: 'Hafna' }
+  : { text: 'We use Google Analytics to understand how this website is used. Tracking starts only after you consent.', accept: 'Accept', reject: 'Reject' };
+---
+
+<aside class="consent-banner" data-consent-banner hidden aria-label="Google Analytics consent">
+  <p>{copy.text}</p>
+  <div>
+    <button type="button" data-consent-reject>{copy.reject}</button>
+    <button type="button" class="consent-accept" data-consent-accept>{copy.accept}</button>
+  </div>
+</aside>
+
+<script>
+  declare global {
+    interface Window { gtag?: (...args: unknown[]) => void; }
+  }
+
+  const storageKey = 'hofn_google_consent';
+  const banner = document.querySelector<HTMLElement>('[data-consent-banner]');
+  const choice = localStorage.getItem(storageKey);
+  if (banner && !choice) banner.hidden = false;
+
+  function saveConsent(value: 'granted' | 'denied') {
+    localStorage.setItem(storageKey, value);
+    window.gtag?.('consent', 'update', { analytics_storage: value });
+    if (banner) banner.hidden = true;
+  }
+
+  document.querySelector('[data-consent-accept]')?.addEventListener('click', () => saveConsent('granted'));
+  document.querySelector('[data-consent-reject]')?.addEventListener('click', () => saveConsent('denied'));
+
+  document.addEventListener('click', (event) => {
+    const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[data-track-airbnb]');
+    if (!link) return;
+    window.gtag?.('event', 'click_airbnb', {
+      click_source: link.dataset.trackAirbnb || 'button',
+      link_url: link.href,
+    });
+  });
+</script>
+
+<style>
+  .consent-banner {
+    position: fixed;
+    z-index: 1000;
+    right: 1rem;
+    bottom: 1rem;
+    width: min(30rem, calc(100% - 2rem));
+    padding: 1rem;
+    border: 1px solid rgba(21, 50, 44, .18);
+    border-radius: .8rem;
+    background: #fffdf7;
+    color: #17362f;
+    box-shadow: 0 .8rem 2.5rem rgba(0, 0, 0, .18);
+  }
+  .consent-banner[hidden] { display: none; }
+  .consent-banner p { margin: 0 0 .8rem; line-height: 1.45; }
+  .consent-banner div { display: flex; justify-content: flex-end; gap: .6rem; }
+  .consent-banner button { padding: .65rem .9rem; border: 1px solid #17362f; border-radius: 999px; background: transparent; color: inherit; cursor: pointer; }
+  .consent-banner .consent-accept { background: #17362f; color: white; }
+</style>

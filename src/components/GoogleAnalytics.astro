@@ -1,0 +1,29 @@
+---
+const MEASUREMENT_ID = 'G-LTWC0BTLV8';
+---
+
+<script is:inline define:vars={{ MEASUREMENT_ID }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+
+  gtag('consent', 'default', {
+    analytics_storage: 'denied',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    wait_for_update: 500,
+  });
+
+  if (localStorage.getItem('hofn_google_consent') === 'granted') {
+    gtag('consent', 'update', { analytics_storage: 'granted' });
+  }
+
+  gtag('js', new Date());
+  gtag('config', MEASUREMENT_ID, { anonymize_ip: true });
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`;
+  document.head.appendChild(script);
+</script>

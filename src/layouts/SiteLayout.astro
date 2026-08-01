@@ -1,6 +1,8 @@
 ---
 import AirbnbButton from '../components/AirbnbButton.astro';
 import BaseHead from '../components/BaseHead.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import { localeInfo, localeUrl, locales, type Locale, type RouteKey } from '../i18n/config';
 import { ui } from '../i18n/ui';
 import '../styles/global.css';
@@ -48,6 +50,8 @@ const messages = ui[locale];
       locale={locale}
       route={route}
     />
+    <meta name="google-site-verification" content="O1MDE1Fzjh_kWw1xO1qtheA2LnETfx6NKBZ2QUvvlAk" />
+    <GoogleAnalytics />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -91,5 +95,6 @@ const messages = ui[locale];
         </div>
       </footer>
     )}
+    <ConsentBanner locale={locale} />
   </body>
 </html>

@@ -17,6 +17,12 @@ import { AIRBNB_LISTING_URL } from '../lib/site-links';
 
 const AVAILABILITY_STALE_TIME = 15 * 60 * 1000;
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 export interface AvailabilityCalendarMessages {
   eyebrow: string;
   title: string;
@@ -82,7 +88,13 @@ function CalendarContent({ locale, messages }: AvailabilityCalendarProps) {
 
   function openAirbnbForArrival(date: CalendarDate) {
     if (date.compare(currentDate) < 0 || blocked.has(date.toString())) return;
-    window.open(airbnbListingUrlForArrival(date), '_blank', 'noopener,noreferrer');
+    const url = airbnbListingUrlForArrival(date);
+    window.gtag?.('event', 'click_airbnb', {
+      click_source: 'availability_calendar',
+      check_in: date.toString(),
+      link_url: url,
+    });
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
   return (
