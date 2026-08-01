@@ -9,15 +9,10 @@
     "binding": "ASSETS",
     "directory": "./dist/client"
   },
-  "r2_buckets": [
-    {
-      "binding": "MEDIA",
-      "bucket_name": "hofn-dalvik-media"
-    }
-  ],
   "routes": [
     {
       "pattern": "hofn.manifesto.is",
+      "zone_name": "manifesto.is",
       "custom_domain": true
     }
   ],
